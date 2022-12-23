@@ -198,7 +198,7 @@ body{
 }
 
 h3{
-    font-family:sans-serif;
+    font-family: "Suez One", sans-serif;
     color: #5f5f5f;
     padding-left: 4%;
     font-size: 26px;
@@ -274,6 +274,7 @@ h3{
 }
 
 .middle .display-items .items-container .items .position span {
+    font-family: "Fjord One", sans-serif;
     display: block;
     margin-top: 4px;
 }
@@ -351,7 +352,8 @@ h3{
     margin: 4px;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in;
+    border-style: none;
 }
 
 .middle .display-items .items-container .items .item .item-image .image-details .image-prices:hover{
