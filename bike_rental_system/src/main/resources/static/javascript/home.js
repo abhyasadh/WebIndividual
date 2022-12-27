@@ -95,8 +95,8 @@ for (let j = 0; j < categories.length; j++) {
 let length = document.getElementsByClassName("see-more").length;
 for(let i=0; i<length; i++) {
     document.getElementsByClassName("see-more").item(i).addEventListener("click", function openCategory() {
-            localStorage.setItem("topic", document.getElementsByClassName("see-more").item(i).parentElement.innerText.slice(10,))
-            window.location.href = ("category.html")
+            sessionStorage.setItem("topic", document.getElementsByClassName("see-more").item(i).parentElement.innerText.slice(10,))
+            window.location.thhref = ("");
         }
     )
 }

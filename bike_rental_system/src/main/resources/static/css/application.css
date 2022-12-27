@@ -11,7 +11,7 @@
     z-index: 3;
 }
 
-.head .logo-div .logo{
+.head .logo-div .logo, .head-login .logo-div .logo {
     height: 60px;
     padding-left: 18px;
     mix-blend-mode: lighten;
@@ -372,7 +372,7 @@ h3{
 .middle .display-items .items-container .items .item .bike-name{
     width: 100%;
     text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Artifika, serif;
     font-weight: bold;
     font-size: 22px;
     color: #333333;
@@ -383,7 +383,7 @@ h3{
 .middle .display-items .items-container .items .item .bike-brand{
     width: 100%;
     text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Blinker, serif;
     font-weight: bold;
     font-size: 14px;
     color: #333333;
@@ -546,12 +546,3 @@ h3{
         font-size: 13px;
     }
 }
-
-@keyframes rotation {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(359deg);
-    }
-  }

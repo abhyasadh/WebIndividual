@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="../static/css/application.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{~/css/application.css}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Fjord+One' rel='stylesheet'>
-    <script src="../static/javascript/home.js" defer></script>
+    <link href='https://fonts.googleapis.com/css?family=Blinker' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
+    <script th:src="@{~/javascript/home.js}" defer></script>
     <title>Bikes || BikeSapati</title>
 </head>
 <body>
@@ -14,7 +17,7 @@
 
             <!-- Logo Division -->
             <div class="logo-div" style="flex: 1.5;">
-                <img src="../static/images/logos/logopng.png" alt="logo" class="logo">
+                <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
             </div>
 
             <!-- Search Division -->
@@ -30,7 +33,7 @@
                 <!-- Search Button -->
                 <div>
                     <button class="search-button" onclick="alert('Searched')">
-                        <img src="../static/images/search.png" alt="Go">
+                        <img th:src="@{~/images/search.png}" alt="Go">
                     </button>
                 </div>
             </div>
@@ -43,15 +46,15 @@
                             <div class="profile-head"></div>
                             <div class="profile-body"></div>
                         </div>
-                        <a href="#" class="profile-link"><span>Abhyas Adhikari</span></a>
+                        <a href="login.html" class="profile-link"><span>Login</span></a>
                     </div>
                     <div style="height: 8px;"></div>
                     <div class="drop-down-profile">
-                        <div class="dropdown-element"><a href="#"><img src="../static/images/drop-down/user.svg" class="element-image" alt="User">Account Settings</a><br></div>
-                        <div class="dropdown-element"><a href="#"><img src="../static/images/drop-down/calendar_check.svg" class="element-image" alt="Reservations">My Reservations</a><br></div>
-                        <div class="dropdown-element"><a href="#"><img src="../static/images/drop-down/help_circle_outline.svg" class="element-image" alt="Help">Help & Support</a><br></div>
-                        <div class="dropdown-element"><a href="#"><img src="../static/images/drop-down/message.svg" class="element-image" alt="Feedback">Feedback</a><br></div>
-                        <div class="dropdown-element"><a href="#" style="color: #f95d5d;"><img src="../static/images/drop-down/log_out.svg" class="element-image" alt="Logout">Logout</a><br></div>
+                        <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/user.svg}" class="element-image" alt="User">Account Settings</a><br></div>
+                        <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/calendar_check.svg}" class="element-image" alt="Reservations">My Reservations</a><br></div>
+                        <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/help_circle_outline.svg}" class="element-image" alt="Help">Help & Support</a><br></div>
+                        <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/message.svg}" class="element-image" alt="Feedback">Feedback</a><br></div>
+                        <div class="dropdown-element"><a href="/login" style="color: #f95d5d;"><img th:src="@{~/images/drop-down/log_out.svg}" class="element-image" alt="Logout">Logout</a><br></div>
                     </div>
                 </div>
             </div>
@@ -97,19 +100,19 @@
 
                     <div class="socials">
                         <div class="social-link">
-                            <a href="https://www.facebook.com/avyash.adh/" target="_blank"><img src="../static/images/social-media/facebook.svg" alt="Facebook"></a>
+                            <a href="https://www.facebook.com/avyash.adh/" target="_blank"><img th:src="@{~/images/social-media/facebook.svg}" alt="Facebook"></a>
                         </div>
                         
                         <div class="social-link">
-                            <a href="https://www.instagram.com/abhyas.adh/" target="_blank"><img src="../static/images/social-media/instagram.svg" alt="Instagram"></a>
+                            <a href="https://www.instagram.com/abhyas.adh/" target="_blank"><img th:src="@{~/images/social-media/instagram.svg}" alt="Instagram"></a>
                         </div>
                         
                         <div class="social-link">
-                            <a href="https://www.linkedin.com/in/abhyas-adh/" target="_blank"><img src="../static/images/social-media/LinkedIn.svg" alt="LinkedIn"></a>
+                            <a href="https://www.linkedin.com/in/abhyas-adh/" target="_blank"><img th:src="@{~/images/social-media/LinkedIn.svg}" alt="LinkedIn"></a>
                         </div>
                         
                         <div class="social-link">
-                            <a href="https://github.com/abhyasadh" target="_blank"><img src="../static/images/social-media/Github.svg" alt="Github"></a>
+                            <a href="https://github.com/abhyasadh" target="_blank"><img th:src="@{~/images/social-media/Github.svg}" alt="Github"></a>
                         </div>
                         
                     </div>
@@ -127,7 +130,7 @@
 
             <div class="copyright">
                 <div class = "logo">
-                    <img src="../static/images/logos/softwaricalogo.png" height="46px" alt="Softwarica Logo">
+                    <img th:src="@{~/images/logos/softwaricalogo.png}" height="46px" alt="Softwarica Logo">
                 </div>
                 <div class="text">
                     © Copyright 2022 - Designed and Developed by <b>Abhyas Adhikari</b>.

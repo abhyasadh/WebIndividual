@@ -2,71 +2,270 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="../static/css/login.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{~/css/login.css}" rel="stylesheet">
+    <link th:href="@{~/css/application.css}" rel="stylesheet">
+
     <link href='https://fonts.googleapis.com/css?family=Rammetto+One' rel='stylesheet'>
-    <script src="../static/javascript/login.js" defer></script>
+    <link href='https://fonts.googleapis.com/css?family=Blinker' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <script th:src="@{~/javascript/login.js}" defer></script>
     <title>Login || BikeSapati</title>
 </head>
 <body>
 
-    <div class = "form">
-        <div class="tab-buttons">
-            <button class="login"><span>Sign in</span></button>
-            <button class="signup"><span>Register</span></button>
+<header>
+    <div class="head-login">
+
+        <!-- Logo Division -->
+        <div class="logo-div" style="flex: 1">
+            <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
         </div>
 
-        <div class="login-form">
+        <ul class="navbar">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">How To</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
 
-            <div>
-                <div class="text-input-container">
-                    <label>
+    </div>
+</header>
+
+    <div class="form-container" id="home">
+        <div class="image">
+            <div class="text">
+                <h1>Looking to<br>rent a <span>Bike?</span></h1>
+            </div>
+            <img th:src="@{~/images/bike.png}" alt="" class="bike-image">
+        </div>
+
+        <div class = "form">
+            <div class="tab-buttons">
+                <button class="login"><span>Sign in</span></button>
+                <button class="signup"><span>Register</span></button>
+            </div>
+
+            <div class="login-container">
+                <form class="login-form">
+                    <div class="text-input-container">
                         <input type="email" placeholder="Enter your email..." class="text-input">
-                    </label>
-                </div>
+                        <i class="fas fa-envelope fa-xs"></i>
+                    </div>
 
-                <div class="password-input-container">
-                    <label>
+                    <div class="password-input-container">
                         <input type="password" placeholder="Enter your password..." class="password-input">
-                    </label>
-                    <button class="show-password-button" onclick="showPassword(0)"><img src="../static/images/logos/show.png" alt="Show" class="show-password-image"></button>
+                        <i class="fas fa-lock fa-xs"></i>
+                        <button class="show-password-button" onclick="showPassword(0)"><i class="fa fa-eye"></i></button>
+                    </div>
+
+                    <div class="forgot">
+                        <a href="#" class="forgot">Recover Password</a>
+                    </div>
+
+                    <button type="submit" class="submit" style="margin-top: 29px">SIGN IN</button>
+                </form>
+
+                <div class="or">
+                    <hr>Or<hr>
                 </div>
+
+                <button class="submit" style="margin-top: 20px">CONTINUE AS A GUEST</button>
+
             </div>
 
-            <div class="forgot">
-                <a href="#" class="forgot">Recover Password</a>
+            <div class="signup-container">
+                <form class="signup-form">
+                    <div class="text-input-container-short">
+                        <div class="text-input-container">
+                           <input type="text" placeholder="First Name..." class="text-input">
+                            <i class="fas fa-user fa-xs"></i>
+                        </div>
+
+                        <div class="text-input-container">
+                           <input type="text" placeholder="Last Name..." class="text-input">
+                            <i class="fas fa-user fa-xs"></i>
+                        </div>
+                    </div>
+
+                    <div class="text-input-container">
+                        <input type="email" placeholder="Enter your email..." class="text-input">
+                        <i class="fas fa-envelope fa-xs"></i>
+                    </div>
+
+                    <div class="password-input-container">
+                        <input type="password" placeholder="Create a password..." class="password-input">
+                        <i class="fas fa-lock fa-xs"></i>
+                        <button class="show-password-button" onclick="showPassword(1)"><i class="fas fa-eye"></i></button>
+                    </div>
+
+                    <div class="password-input-container">
+                        <input type="password" placeholder="Confirm password..." class="password-input">
+                        <i class="fas fa-lock fa-xs"></i>
+                        <button class="show-password-button" onclick="showPassword(2)"><i class="fa fa-eye"></i></button>
+                    </div>
+
+                    <button type="submit" class="submit">REGISTER</button>
+                </form>
             </div>
 
-            <button type="submit" class="submit">SIGN IN</button>
         </div>
+    </div>
 
-        <div class="signup-form">
-            <div class="signup-names">
-                <label>
-                    <input type="text" placeholder="First Name..." class="text-input-short">
-                </label>
-                <label>
-                    <input type="text" placeholder="Last Name..." class="text-input-short">
-                </label>
+    <div class="how-it-works" id="services">
+        <div class="text-topic">
+            <span>HOW IT WORKS</span>
+            <h1>Rent With 3 Easy Steps</h1>
+        </div>
+        <div class="hiw-container">
+            <div class="box">
+                <i class="fas fa-hand-pointer fa-2x"></i>
+                <h2>Select Your Ride</h2>
+                <p>We have wide range of bikes categorized from commuters to electric. You will surely find the one of your choice.</p>
             </div>
-            <label>
-                <input type="email" placeholder="Enter your email..." class="text-input">
-            </label>
-            <div class="password-input-container">
-                <label>
-                    <input type="password" placeholder="Create a password..." class="password-input">
-                </label>
-                <button class="show-password-button" onclick="showPassword(1)"><img src="../static/images/logos/show.png" alt="Show" class="show-password-image"></button>
+
+            <div class="box">
+                <i class="fas fa-calendar fa-2x"></i>
+                <h2>Choose a Date</h2>
+                <p>Pick when you want to rent a bike and when you will return it. If the bike is available, you can book it immediately.</p>
             </div>
-            <div class="password-input-container">
-                <label>
-                    <input type="password" placeholder="Confirm password..." class="password-input">
-                </label>
-                <button class="show-password-button" onclick="showPassword(2)"><img src="../static/images/logos/show.png" alt="Show" class="show-password-image"></button>
+
+            <div class="box">
+                <i class="fas fa-calendar-check fa-2x"></i>
+                <h2>Book Your Choice</h2>
+                <p>Select how and when you want to pay. Both online and in-person payments are accepted.</p>
             </div>
-            <button type="submit" class="submit">REGISTER</button>
         </div>
 
     </div>
 
+    <div class="about" id="about">
+        <div class="text-topic">
+            <span>ABOUT US</span>
+            <h1>Providing the Best Services</h1>
+        </div>
+        <div class="image"></div>
+        <div class="paragraph"></div>
+    </div>
+
+    <div class="reviews" id="reviews">
+        <div class="text-topic">
+            <span>REVIEWS</span>
+            <h1>What Our Customers Have To Say</h1>
+        </div>
+        <div class="review-container">
+            <div class="box">
+                <div class="img-container">
+                    <img th:src="@{~/images/rabi.jpg}" alt="person1">
+                </div>
+                <h2>Rabindra Wagle</h2>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <p>"I am hero."</p>
+            </div>
+
+            <div class="box">
+                <div class="img-container">
+                    <img th:src="@{~/images/aashu.jpg}" alt="person1">
+                </div>
+                <h2>Aashutosh Aryal</h2>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <p>"I am gay."</p>
+            </div>
+
+            <div class="box">
+                <div class="img-container">
+                    <img th:src="@{~/images/aashu.jpg}" alt="person1">
+                </div>
+                <h2>Aashutosh Aryal</h2>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <p>"I am gay."</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer" style="margin-top: 0">
+            <div class="upper-part">
+
+                <div class="categories" style="flex: 1;">
+                    <p class="title">Useful Links</p>
+                    <div class="links">
+                        <a href="https://www.honda.com.np/" class="category-link" target="_blank">Honda</a>
+                        <a href="https://nepal.globalbajaj.com/en" class="category-link" target="_blank">Bajaj</a>
+                        <a href="https://suzukimotorcycle.com.np/" class="category-link" target="_blank">Suzuki</a>
+                        <a href="https://ngmhero.com/" class="category-link" target="_blank">Hero</a>
+                        <a href="https://tvsnepal.com/" class="category-link" target="_blank">TVS</a>
+                        <a href="https://www.ktm.com/en-np.html" class="category-link" target="_blank">KTM</a>
+                        <a href="https://www.benelli.com/np-en" class="category-link" target="_blank">Benelli</a>
+                        <a href="https://yatrimotorcycles.com/" class="category-link" target="_blank">Yatri</a>
+                        <a href="https://vmotosoco.com.np/" class="category-link" target="_blank">Super Soco</a>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="description">
+                    <p class="title">Bike Sapati</p>
+                    <p class="description">BikeSapati is a ride renting platform for two-wheelers. On this platform, you can
+                        view images, view specifications and rent bikes with different plans for any period of time
+                        from a day to a year.</p>
+
+                    <div class="socials">
+                        <div class="social-link">
+                            <a href="https://www.facebook.com/avyash.adh/" target="_blank"><img th:src="@{~/images/social-media/facebook.svg}" alt="Facebook"></a>
+                        </div>
+
+                        <div class="social-link">
+                            <a href="https://www.instagram.com/abhyas.adh/" target="_blank"><img th:src="@{~/images/social-media/instagram.svg}" alt="Instagram"></a>
+                        </div>
+
+                        <div class="social-link">
+                            <a href="https://www.linkedin.com/in/abhyas-adh/" target="_blank"><img th:src="@{~/images/social-media/LinkedIn.svg}" alt="LinkedIn"></a>
+                        </div>
+
+                        <div class="social-link">
+                            <a href="https://github.com/abhyasadh" target="_blank"><img th:src="@{~/images/social-media/Github.svg}" alt="Github"></a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class ="contact">
+                    <p class="title">Contact Us</p>
+                    <div class="dropdown-element"><img th:src="@{~/images/contact/phone_outline.svg}" class="element-image" alt="Phone">9841234567, 01-4412345<br></div>
+                    <div class="dropdown-element"><img th:src="@{~/images/contact/mail.svg}" class="element-image" alt="Mail"><a href="mailto: adhikari.abhyash@gmail.com" style="color: white">adhikari.abhyash@gmail.com</a><br></div>
+                    <div class="dropdown-element"><img th:src="@{~/images/contact/location_outline.svg}" class="element-image" alt="Location">Dillibazar, Kathmandu<br></div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <div class = "logo">
+                    <img th:src="@{~/images/logos/softwaricalogo.png}" height="46px" alt="Softwarica Logo">
+                </div>
+                <div class="text">
+                    © Copyright 2022 - Designed and Developed by <b>Abhyas Adhikari</b>.
+                </div>
+
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

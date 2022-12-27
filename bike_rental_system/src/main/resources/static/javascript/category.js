@@ -7,7 +7,7 @@ topic = document.createElement("div");
 topic.className = "topic";
 
 topicText = document.createElement("h3");
-topicText.innerHTML += localStorage.getItem("topic");
+topicText.innerHTML += sessionStorage.getItem("topic");
 
 seeLess = document.createElement("div");
 seeLess.className = "see-more";

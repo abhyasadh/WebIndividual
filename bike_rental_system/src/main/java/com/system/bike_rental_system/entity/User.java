@@ -1,7 +1,15 @@
 package com.system.bike_rental_system.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -12,9 +20,18 @@ public class User {
     private Integer id;
 
     @Column(nullable = false)
+    private String fName;
+
+    @Column(nullable = false)
+    private String lName;
+
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @Column(name = "mobile_no")
-    private String mobileNo;
+    private String mobile;
 }
 

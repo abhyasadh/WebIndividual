@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
     <link href="../static/css/application.css" rel="stylesheet">
     <script src="../static/javascript/category.js" defer></script>
     <title>Title</title>
@@ -12,7 +13,7 @@
 
     <!-- Logo Division -->
     <div class="logo-div" style="flex: 1.5;">
-      <img src="../static/images/logos/logopng.png" alt="logo" class="logo">
+      <img th:src="@{~/images/logos/logopng.png}" alt="logo" class="logo">
     </div>
 
     <!-- Search Division -->
@@ -41,7 +42,7 @@
             <div class="profile-head"></div>
             <div class="profile-body"></div>
           </div>
-          <a href="#" class="profile-link"><span>Abhyas Adhikari</span></a>
+          <a href="#" class="profile-link"><span>Login</span></a>
         </div>
         <div style="height: 8px;"></div>
         <div class="drop-down-profile">

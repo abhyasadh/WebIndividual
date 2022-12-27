@@ -11,6 +11,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserPojo {
     private Integer id;
+    private String fName;
+    private String lName;
     private String email;
+    private String password;
     private String mobileNo;
+
+
 }

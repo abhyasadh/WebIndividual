@@ -1,42 +1,112 @@
-body{
-    padding: 0;
+body {
     margin: 0;
+    padding: 0;
 }
 
-.form {
-    width: 350px;
-    border-radius: 18px;
-    height: 400px;
+.head-login{
+    background-color: #f17300;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 4;
 }
 
-.form .tab-buttons {
+.head-login .navbar {
+    display: flex;
+    flex: 0.7;
+}
+
+.head-login .navbar a{
+    text-decoration: none;
+    font-family: Blinker, serif;
+    position: relative;
+    padding: 10px 20px;
+    color: white;
+}
+
+.head-login .navbar li {
+    list-style: none;
+    position: relative;
+}
+
+.form-container {
+    width: 100%;
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-container .image{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background: url(../images/back.png) no-repeat;
+    background-size: 100% 102%;
+    height: calc(100vh - 70px);
+}
+
+.form-container .image .text h1{
+    font-size: 3rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Artifika, sans-serif;
+}
+
+.form-container .image .text h1 span {
+    color: #f17300;
+}
+
+.form-container .image .bike-image {
+    width: 90%;
+    max-width: 90%;
+}
+
+.form-container .form {
+    flex: 1;
+    max-width: 450px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.form-container .form .tab-buttons {
     width: 100%;
     display: flex;
 }
 
-.form .tab-buttons button{
+.form-container .form .tab-buttons button{
     width: 100%;
     flex: 1;
     height: 50px;
 }
 
-.form .tab-buttons .login {
+.form-container .form .tab-buttons .login {
     border-radius: 16px;
     font-family: "Rammetto One", sans-serif;
     font-size: 16px;
     color: white;
     border-style: none;
     cursor: pointer;
-    background-color: #586ba4;
+    background-color: #f17300;
     transition: all 250ms ease-out;
     margin: 4px;
 }
 
-.form .tab-buttons .signup {
+.form-container .form .tab-buttons .signup {
     border-radius: 16px;
     font-family: "Rammetto One", sans-serif;
     font-size: 16px;
-    color: #586ba4;
+    color: #f17300;
     background-color: white;
     border-style: none;
     cursor: pointer;
@@ -45,80 +115,140 @@ body{
     scale: 0.8;
 }
 
-.form .login-form, .form .signup-form {
+.form-container .form .login-container {
+    width: 350px;
+    padding: 10px 24px 24px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-.form .text-input, .form .text-input-short{
-    width: 280px;
+.form-container .form .signup-container {
+    width: 350px;
+    padding: 10px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+i {
+    margin-left: 10px;
+    color: #9f9f9f;
+}
+
+input ~ i {
+    margin-left: 10px;
+    color: #9f9f9f;
+    position: absolute;
+    transition: color   0.4s;
+}
+
+input:focus ~ i {
+    color: #e53e3e;
+    /*color: #71cc35; green*/
+}
+
+.form-container .form .login-container .or {
+    display: flex;
+    width: 100%;
+    height: 19px;
+    color: #f17300;
+    font-family: Blinker, sans-serif;
+    margin-top: 22px;
+}
+
+.form-container .form .login-container .or hr{
+    width: 40%;
+    border-radius: 5px;
+}
+
+.form-container .form .text-input-container {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #EFEFEF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.form-container .form .login-form, .form .signup-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container .form .signup-form .text-input-container-short {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.form-container .form .signup-form .signup-names .name {
+    display: flex;
+    width: 100%;
+}
+
+.form-container .form .text-input{
+    width: 100%;
+    height: 38px;
+    border: none;
+    background-color: #EFEFEF;
+    font-size: 14px;
+    padding-left: 30px;
+    border-radius: 8px;
+}
+
+.form-container .form .text-input:focus{
+    outline: none;
+}
+
+.form-container .form .password-input-container {
+    width: 100%;
+    display: flex;
+    border-radius: 8px;
+    border: none;
+    background-color: #EFEFEF;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form-container .form .password-input{
+    width: 100%;
     height: 38px;
     border-radius: 8px;
     border: none;
     background-color: #EFEFEF;
-    margin-top: 20px;
-    padding: 0 12px 0 12px;
-    font-size: 14px;
+    padding-left: 30px;
 }
 
-.form .text-input-short{
-    width: 120px;
-    margin: 20px 5px 0 5px;
-}
-
-.form .text-input:focus, .form .text-input-short:focus{
-    outline-color: #fb6565;
-}
-
-.form .password-input-container {
-    width: 302px;
-    height: 34px;
-    display: flex;
-    border-radius: 8px;
-    border: none;
-    background-color: #EFEFEF;
-    align-items: center;
-    padding: 2px 1px 2px 1px;
-    margin-top: 20px;
-}
-
-.form .password-input{
-    width: 248px;
-    height: 32px;
-    border-radius: 8px;
-    border: none;
-    background-color: #EFEFEF;
-    padding: 0 6px 0 12px;
-}
-
-.form .password-input:focus{
+.form-container .form .password-input:focus{
     outline: none;
 }
 
-.form .show-password-button{
+.form-container .form .show-password-button{
     width: 28px;
     height: 28px;
-    margin: 2px;
+    margin-right: 12px;
     border: none;
     cursor: pointer;
-    padding: 4px 0 0;
     background-color: #EFEFEF;
 }
 
-.form .login-form .forgot {
+.form-container .form .login-form .forgot {
     display: inline-block;
-    margin-left: 90px;
-    font-family: Cambria, serif;
+    float: right;
+    font-family: Blinker, serif;
     font-size: 12px;
     text-decoration: none;
-    margin-top: 3px;
+    margin-top: 5px;
+    padding-bottom: 2px;
+    margin-left: 118px;
     color: #586ba4;
     position: relative;
 }
 
-.form .login-form .forgot a:after {
+.form-container .form .login-form .forgot a:after, .head-login .navbar a:after {
     content: '';
     position: absolute;
     width: 100%;
@@ -131,21 +261,139 @@ body{
     transition: transform 0.25s ease-out;
 }
 
-.form .login-form .forgot a:hover:after {
+.head-login .navbar a:after{
+    background-color: white;
+}
+
+.form-container .form .login-form .forgot a:hover:after, .head-login .navbar a:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
 
-.form .submit {
-    width: 40%;
-    height: 38px;
+.form-container .form .submit {
+    width: 100%;
+    height: 42px;
     border-radius: 8px;
     border: none;
     color: white;
-    background-color: #586ba4;
+    background-color: #f17300;
     margin-top: 40px;
     padding: 0 12px 0 12px;
     font-size: 12px;
     font-family: "Rammetto One", sans-serif;
     cursor: pointer;
+    transition: all 250ms ease-in;
+}
+
+.form-container .form .submit:hover {
+    scale: 1.05;
+}
+
+.how-it-works, .about, .reviews{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 35px;
+    background-color: #EFEFEF;
+    padding-bottom: 35px;
+}
+
+.about {
+    background-color: white;
+}
+
+.how-it-works .hiw-container .box i{
+    color: #f17300;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #DFDFDF;
+    transition: all 350ms ease-in-out;
+}
+
+.how-it-works .hiw-container .box i:hover{
+    scale: 1.1;
+    background-image: linear-gradient(#faaa79, #f17300);
+    color: white;
+}
+
+.text-topic{
+    text-align: center;
+}
+
+.text-topic span {
+    font-family: Blinker, sans-serif;
+    font-size: 1.5rem;
+}
+
+.text-topic h1{
+    font-family: Artifika, sans-serif;
+    font-size: 2.5rem;
+}
+
+.how-it-works .hiw-container, .reviews .review-container{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    gap: 1rem;
+}
+
+.reviews .review-container{
+    gap: 2rem;
+    padding-bottom: 50px;
+}
+
+.how-it-works .hiw-container .box{
+    text-align: center;
+    padding: 20px;
+}
+
+.box h2{
+    font-family: Artifika, sans-serif;
+}
+
+.box p{
+    font-family: Blinker, sans-serif;
+}
+
+.reviews .review-container .box{
+    border-style: solid;
+    border-radius: 18px;
+    text-align: center;
+    padding: 20px;
+    background: white;
+}
+
+.reviews .review-container .box .img-container {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.reviews .review-container .box .img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.reviews .review-container .box i{
+    margin: 5px;
+    color: #f17300;
+}
+
+.reviews .review-container .box p{
+    color: #5f5f5f;
+    font-style: italic;
+}
+
+@media (max-width: 780px) {
+    .form-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-container .image {
+        display: none;
+    }
 }
