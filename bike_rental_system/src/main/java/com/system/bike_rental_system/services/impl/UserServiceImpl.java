@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userPojo.getEmail());
         user.setFName(userPojo.getFName());
         user.setLName(userPojo.getLName());
-        user.setMobile(userPojo.getMobileNo());
         user.setPassword(userPojo.getPassword());
         userRepo.save(user);
         return "created";
@@ -29,5 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> fetchAll() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public User fetchById(Integer id) {
+        return userRepo.findById(id).orElseThrow(()->new RuntimeException("Not Found"));
     }
 }

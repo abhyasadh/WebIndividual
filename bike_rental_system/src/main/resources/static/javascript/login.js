@@ -44,3 +44,54 @@ function showPassword(n) {
         buttonImage.style.marginRight="12px"
     }
 }
+
+function validateEmail(element, index){
+    let mail = document.getElementsByClassName(element).item(index).value;
+    const mailReg=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!mail.match(mailReg) || mail === "") {
+        if (index!==0) {
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index - 2).style.color = "#e53e3e";
+        } else {
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index).style.color = "#e53e3e";
+        }
+    } else {
+        if (index!==0) {
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index - 2).style.color = "#71cc35";
+        } else {
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index).style.color = "#71cc35";
+        }
+    }
+}
+
+function validateName(element, index){
+    let name = document.getElementsByClassName(element).item(index).value;
+    if (name===""){
+        document.getElementsByClassName("fas fa-user fa-xs").item(index-1).style.color="#e53e3e";
+    } else {
+        document.getElementsByClassName("fas fa-user fa-xs").item(index-1).style.color="#71cc35";
+    }
+}
+
+function validatePassword(element, index){
+    let password = document.getElementsByClassName(element).item(index).value;
+    const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if (index===0){
+        if (password.length>=8){
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+        } else {
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+        }
+    } else if (index===1) {
+        if (!password.match(passwordReg)) {
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+        } else {
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+        }
+    } else if (index===2){
+        if (password!==document.getElementsByClassName(element).item(1).value){
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+        } else {
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+        }
+    }
+}

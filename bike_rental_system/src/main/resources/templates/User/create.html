@@ -5,32 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-<form class="signup-form">
+<form th:method="post" th:action="@{/user/save}" th:object="${user}">
     <div class="text-input-container-short">
         <div class="text-input-container">
-            <input type="text" placeholder="First Name..." class="text-input">
-            <i class="fas fa-user fa-xs"></i>
+            <input type="text" hidden placeholder="ID..." th:field="*{id}" th:value="${user.id}">
         </div>
 
         <div class="text-input-container">
-            <input type="text" placeholder="Last Name..." class="text-input">
-            <i class="fas fa-user fa-xs"></i>
+            <input type="text" placeholder="First Name..." th:field="*{fName}" th:value="${user.id}">
+        </div>
+
+        <div class="text-input-container">
+            <input type="text" placeholder="Last Name..." th:field="*{lName}" th:value="${user.lName}">
         </div>
     </div>
 
     <div class="text-input-container">
-        <input type="email" placeholder="Enter your email..." class="text-input">
-        <i class="fas fa-envelope fa-xs"></i>
-    </div>
-
-    <div class="text-input-container">
-        <input type="text" placeholder="Enter phone number..." class="text-input">
-        <i class="fas fa-lock fa-xs"></i>
+        <input type="email" placeholder="Enter your email..." th:field="*{email}" th:value="${user.email}">
     </div>
 
     <div class="password-input-container">
-        <input type="password" placeholder="Confirm password..." class="password-input">
-        <i class="fas fa-lock fa-xs"></i>
+        <input type="password" placeholder="Confirm password..." th:field="*{password}" th:value="${user.fName}">
     </div>
 
     <button type="submit" class="submit">REGISTER</button>

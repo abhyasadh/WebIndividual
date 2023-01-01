@@ -184,11 +184,6 @@ input:focus ~ i {
     gap: 20px;
 }
 
-.form-container .form .signup-form .signup-names .name {
-    display: flex;
-    width: 100%;
-}
-
 .form-container .form .text-input{
     width: 100%;
     height: 38px;
@@ -338,9 +333,37 @@ input:focus ~ i {
     gap: 1rem;
 }
 
+.about .content {
+    display: flex;
+}
+
+.about .content .image {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.about .content .image img{
+    width: 80%;
+}
+
+.about .content .paragraph{
+    flex: 1.8;
+    font-family: Blinker, sans-serif;
+    text-align: justify;
+    width: 80%;
+    display: flex;
+    padding-right: 30px;
+    padding-top: 30px;
+    align-content: center;
+}
+
 .reviews .review-container{
-    gap: 2rem;
-    padding-bottom: 50px;
+    gap: 1.75rem;
+    padding-bottom: 40px;
+    margin-top: 20px;
 }
 
 .how-it-works .hiw-container .box{
@@ -379,7 +402,7 @@ input:focus ~ i {
 
 .reviews .review-container .box i{
     margin: 5px;
-    color: #f17300;
+    color: #ffaa4a;
 }
 
 .reviews .review-container .box p{
@@ -395,5 +418,14 @@ input:focus ~ i {
 
     .form-container .image {
         display: none;
+    }
+
+    .about .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about .content .paragraph {
+        padding: 30px;
     }
 }

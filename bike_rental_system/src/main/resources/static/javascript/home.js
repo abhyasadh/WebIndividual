@@ -34,6 +34,8 @@ for (let j = 0; j < categories.length; j++) {
         itemImage = document.createElement("div");
         itemImage.className = "item-image";
 
+        itemImage.innerHTML+="<img src='/images/aashu.jpg'>"
+
         imageDetails = document.createElement("div");
         imageDetails.className = "image-details";
         imageDetails.innerHTML += "<h4 style='margin-bottom:4px; margin-top:0'>Choose a Plan: </h4>";
@@ -96,7 +98,7 @@ let length = document.getElementsByClassName("see-more").length;
 for(let i=0; i<length; i++) {
     document.getElementsByClassName("see-more").item(i).addEventListener("click", function openCategory() {
             sessionStorage.setItem("topic", document.getElementsByClassName("see-more").item(i).parentElement.innerText.slice(10,))
-            window.location.thhref = ("");
+            window.location.href = ("redirect:/create");
         }
     )
 }

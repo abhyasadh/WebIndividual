@@ -46,21 +46,21 @@
 
         <div class = "form">
             <div class="tab-buttons">
-                <button class="login"><span>Sign in</span></button>
-                <button class="signup"><span>Register</span></button>
+                <button class="login" type="button"><span>Sign in</span></button>
+                <button class="signup" type="button"><span>Register</span></button>
             </div>
 
             <div class="login-container">
                 <form class="login-form">
                     <div class="text-input-container">
-                        <input type="email" placeholder="Enter your email..." class="text-input">
+                        <input type="email" placeholder="Enter your email..." class="text-input" onkeyup="validateEmail('text-input', 0)">
                         <i class="fas fa-envelope fa-xs"></i>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Enter your password..." class="password-input">
+                        <input type="password" placeholder="Enter your password..." class="password-input" onkeyup="validatePassword('password-input', 0)">
                         <i class="fas fa-lock fa-xs"></i>
-                        <button class="show-password-button" onclick="showPassword(0)"><i class="fa fa-eye"></i></button>
+                        <button class="show-password-button" type="button" onclick="showPassword(0)"><i class="fa fa-eye"></i></button>
                     </div>
 
                     <div class="forgot">
@@ -79,34 +79,34 @@
             </div>
 
             <div class="signup-container">
-                <form class="signup-form">
+                <form class="signup-form" th:method="post" th:action="@{/save}" th:object="${user}">
                     <div class="text-input-container-short">
                         <div class="text-input-container">
-                           <input type="text" placeholder="First Name..." class="text-input">
+                           <input type="text" placeholder="First Name..." class="text-input" th:field="*{fName}" onkeyup="validateName('text-input', 1)">
                             <i class="fas fa-user fa-xs"></i>
                         </div>
 
                         <div class="text-input-container">
-                           <input type="text" placeholder="Last Name..." class="text-input">
+                           <input type="text" placeholder="Last Name..." class="text-input" th:field="*{lName}" onkeyup="validateName('text-input', 2)">
                             <i class="fas fa-user fa-xs"></i>
                         </div>
                     </div>
 
                     <div class="text-input-container">
-                        <input type="email" placeholder="Enter your email..." class="text-input">
+                        <input type="email" placeholder="Enter your email..." class="text-input" th:field="*{email}" onkeyup="validateEmail('text-input', 3)">
                         <i class="fas fa-envelope fa-xs"></i>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Create a password..." class="password-input">
+                        <input type="password" placeholder="Create a password..." class="password-input" th:field="*{password}" onkeyup="validatePassword('password-input', 1)">
                         <i class="fas fa-lock fa-xs"></i>
-                        <button class="show-password-button" onclick="showPassword(1)"><i class="fas fa-eye"></i></button>
+                        <button class="show-password-button" type="button" onclick="showPassword(1)"><i class="fas fa-eye"></i></button>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Confirm password..." class="password-input">
+                        <input type="password" placeholder="Confirm password..." class="password-input" onkeyup="validatePassword('password-input', 2)">
                         <i class="fas fa-lock fa-xs"></i>
-                        <button class="show-password-button" onclick="showPassword(2)"><i class="fa fa-eye"></i></button>
+                        <button class="show-password-button" type="button" onclick="showPassword(2)"><i class="fa fa-eye"></i></button>
                     </div>
 
                     <button type="submit" class="submit">REGISTER</button>
@@ -148,8 +148,16 @@
             <span>ABOUT US</span>
             <h1>Providing the Best Services</h1>
         </div>
-        <div class="image"></div>
-        <div class="paragraph"></div>
+        <div class="content">
+            <div class="image">
+                <img th:src="@{~/images/logos/logoColoured.png}" alt="logo-image">
+            </div>
+            <div class="paragraph">
+                BikeSapati is a ride renting platform for two-wheelers. On this platform, you can
+                view images, view specifications and rent bikes with different plans for any period of time
+                from a day to a year.
+            </div>
+        </div>
     </div>
 
     <div class="reviews" id="reviews">

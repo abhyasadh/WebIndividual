@@ -1,5 +1,6 @@
 package com.system.bike_rental_system.pojo;
 
+import com.system.bike_rental_system.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,12 @@ public class UserPojo {
     private String lName;
     private String email;
     private String password;
-    private String mobileNo;
 
-
+    public UserPojo(User user){
+        this.id=user.getId();
+        this.fName= user.getFName();
+        this.lName= user.getLName();
+        this.email= user.getEmail();
+        this.password= user.getPassword();
+    }
 }

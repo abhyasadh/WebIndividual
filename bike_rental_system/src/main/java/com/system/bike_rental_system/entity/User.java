@@ -30,8 +30,5 @@ public class User {
 
     @Column(nullable = false)
     private String password;
-
-    @Column(name = "mobile_no")
-    private String mobile;
 }
 

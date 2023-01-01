@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link th:href="@{~/css/application.css}" rel="stylesheet">-->
+<!--    <link th:href="@{~/css/login.css}" rel="stylesheet">-->
+<!--    <link th:href="@{~/css/settings.css}" rel="stylesheet">-->
+  <link href="../static/css/application.css" rel="stylesheet">
+  <link href="../static/css/login.css" rel="stylesheet">
+  <link href="../static/css/settings.css" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Rammetto+One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Blinker' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+<!--    <script th:src="@{~/javascript/account.js}" defer></script>-->
+  <script src="../static/javascript/account.js" defer></script>
+
+  <title>Account Settings || BikeSapati</title>
+</head>
+<body>
+<header>
+  <div class="head">
+
+    <!-- Logo Division -->
+    <div class="logo-div" style="flex: 1.5;">
+      <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
+    </div>
+
+    <!-- Search Division -->
+    <div class="search-div">
+
+      <!-- Input Box -->
+      <div style="flex: 1;">
+        <label>
+          <input placeholder="Search Bikes..." class="search">
+        </label>
+      </div>
+
+      <!-- Search Button -->
+      <div>
+        <button class="search-button" onclick="alert('Searched')">
+          <img th:src="@{~/images/search.png}" alt="Go">
+        </button>
+      </div>
+    </div>
+
+    <!-- Profile Picture Division -->
+    <div class="profile">
+      <div class = left-align-profile>
+        <div class="profile-div" onclick="alert('Profile')">
+          <div class="picture">
+            <div class="profile-head"></div>
+            <div class="profile-body"></div>
+          </div>
+          <a href="login.html" class="profile-link"><span>Login</span></a>
+        </div>
+        <div style="height: 8px;"></div>
+        <div class="drop-down-profile">
+          <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/user.svg}" class="element-image" alt="User">Account Settings</a><br></div>
+          <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/calendar_check.svg}" class="element-image" alt="Reservations">My Reservations</a><br></div>
+          <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/help_circle_outline.svg}" class="element-image" alt="Help">Help & Support</a><br></div>
+          <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/message.svg}" class="element-image" alt="Feedback">Feedback</a><br></div>
+          <div class="dropdown-element"><a href="/login" style="color: #f95d5d;"><img th:src="@{~/images/drop-down/log_out.svg}" class="element-image" alt="Logout">Logout</a><br></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div class="settings-container" style="padding-top: 75px;">
+  <h3>General Settings</h3>
+    <form class="general-container">
+
+      <div class="general-form-container">
+        <div class="text-inputs">
+
+          <div class="field-container">
+            <div class="headings">Name</div>
+
+            <div class="divider"></div>
+
+            <div class="fields">
+              <div class="text-input-container-short">
+                <div class="text-input-container">
+                  <input type="text" placeholder="First Name..." class="text-input" onkeyup="validateName(0)">
+                  <i class="fas fa-user fa-xs"></i>
+                </div>
+
+                <div class="text-input-container">
+                  <input type="text" placeholder="Last Name..." class="text-input" onkeyup="validateName(1)">
+                  <i class="fas fa-user fa-xs"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-container">
+            <div class="headings">Phone</div>
+
+            <div class="divider"></div>
+
+            <div class="fields">
+                <div class="text-input-container">
+                  <input type="tel" placeholder="Phone Number..." class="text-input" onkeyup="validatePhone()">
+                  <i class="fas fa-phone fa-xs fa-flip-horizontal"></i>
+                </div>
+            </div>
+          </div>
+
+          <div class="field-container">
+            <div class="headings">Address</div>
+
+            <div class="divider"></div>
+
+            <div class="fields">
+              <div class="text-input-container">
+                <input type="text" placeholder="Address..." class="text-input">
+                <i class="fa fa-map-marker-alt fa-xs"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-inputs">
+          <div class="picture">
+
+            <div class="no-image">
+              <div class="profile-head"></div>
+              <div class="profile-body"></div>
+            </div>
+
+            <div class="upload">
+              <input type="file" accept="image/png, image/jpeg" class="input-img" id="profile-pic" onchange="addImage()">
+              <label for="profile-pic"><i class="fas fa-upload"></i>Upload</label>
+              <button type="button" class="remove"><i class="fas fa-trash"></i>Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-div">
+              <button type="submit" class="submit">SAVE CHANGES</button>
+      </div>
+
+    </form>
+
+  <hr width="96%">
+
+  <h3>Documents</h3>
+    <form class="documents-container">
+
+    <div class="documents-form-container">
+      <div class="text-inputs">
+          <div class="field-container">
+            <div class="headings">Citizenship</div>
+            <div class="divider"></div>
+            <div class="fields">
+              <div class="text-input-container-short">
+                <input type="file" accept="image/png, image/jpeg, application/pdf" id="citizen-front" onchange="documentsCheck('citizen-front', 0)">
+                <label for="citizen-front" class="document-name"><i class="fa fa-address-card fa-xs"></i>Citizenship (Front)</label>
+
+                <input type="file" accept="image/png, image/jpeg, application/pdf" id="citizen-back" onchange="documentsCheck('citizen-back', 1)">
+                <label for="citizen-back" class="document-name"><i class="fa fa-address-card fa-xs"></i>Citizenship (Back)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-container">
+            <div class="headings">License</div>
+            <div class="divider"></div>
+            <div class="fields">
+
+              <input type="file" accept="image/png, image/jpeg, application/pdf" id="license" onchange="documentsCheck('license', 2)">
+              <label for="license" class="document-name"><i class="fa fa-address-card fa-xs"></i>License</label>
+
+            </div>
+          </div>
+      </div>
+      <div class="status">
+          <div class="text-field-status">
+          </div>
+      </div>
+    </div>
+
+    <div class="submit-div">
+      <button type="submit" class="submit">SUBMIT</button>
+    </div>
+  </form>
+
+  <hr width="96%">
+
+  <h3>Security Settings</h3>
+    <div class="security-container">
+      <div class="headings">
+
+      </div>
+      <div class="divider">
+
+      </div>
+    </div>
+</div>
+
+<footer>
+  <div class="footer" style="margin-top: 0">
+    <div class="upper-part">
+
+      <div class="categories" style="flex: 1;">
+        <p class="title">Useful Links</p>
+        <div class="links">
+          <a href="https://www.honda.com.np/" class="category-link" target="_blank">Honda</a>
+          <a href="https://nepal.globalbajaj.com/en" class="category-link" target="_blank">Bajaj</a>
+          <a href="https://suzukimotorcycle.com.np/" class="category-link" target="_blank">Suzuki</a>
+          <a href="https://ngmhero.com/" class="category-link" target="_blank">Hero</a>
+          <a href="https://tvsnepal.com/" class="category-link" target="_blank">TVS</a>
+          <a href="https://www.ktm.com/en-np.html" class="category-link" target="_blank">KTM</a>
+          <a href="https://www.benelli.com/np-en" class="category-link" target="_blank">Benelli</a>
+          <a href="https://yatrimotorcycles.com/" class="category-link" target="_blank">Yatri</a>
+          <a href="https://vmotosoco.com.np/" class="category-link" target="_blank">Super Soco</a>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="description">
+        <p class="title">Bike Sapati</p>
+        <p class="description">BikeSapati is a ride renting platform for two-wheelers. On this platform, you can
+          view images, view specifications and rent bikes with different plans for any period of time
+          from a day to a year.</p>
+
+        <div class="socials">
+          <div class="social-link">
+            <a href="https://www.facebook.com/avyash.adh/" target="_blank"><img th:src="@{~/images/social-media/facebook.svg}" alt="Facebook"></a>
+          </div>
+
+          <div class="social-link">
+            <a href="https://www.instagram.com/abhyas.adh/" target="_blank"><img th:src="@{~/images/social-media/instagram.svg}" alt="Instagram"></a>
+          </div>
+
+          <div class="social-link">
+            <a href="https://www.linkedin.com/in/abhyas-adh/" target="_blank"><img th:src="@{~/images/social-media/LinkedIn.svg}" alt="LinkedIn"></a>
+          </div>
+
+          <div class="social-link">
+            <a href="https://github.com/abhyasadh" target="_blank"><img th:src="@{~/images/social-media/Github.svg}" alt="Github"></a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class ="contact">
+        <p class="title">Contact Us</p>
+        <div class="dropdown-element"><img th:src="@{~/images/contact/phone_outline.svg}" class="element-image" alt="Phone">9841234567, 01-4412345<br></div>
+        <div class="dropdown-element"><img th:src="@{~/images/contact/mail.svg}" class="element-image" alt="Mail"><a href="mailto: adhikari.abhyash@gmail.com" style="color: white">adhikari.abhyash@gmail.com</a><br></div>
+        <div class="dropdown-element"><img th:src="@{~/images/contact/location_outline.svg}" class="element-image" alt="Location">Dillibazar, Kathmandu<br></div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class = "logo">
+        <img th:src="@{~/images/logos/softwaricalogo.png}" height="46px" alt="Softwarica Logo">
+      </div>
+      <div class="text">
+        © Copyright 2022 - Designed and Developed by <b>Abhyas Adhikari</b>.
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
