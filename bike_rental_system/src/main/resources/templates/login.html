@@ -41,7 +41,7 @@
             <div class="text">
                 <h1>Looking to<br>rent a <span>Bike?</span></h1>
             </div>
-            <img th:src="@{~/images/bike.png}" alt="" class="bike-image">
+            <img th:src="@{~/images/home-images/bike.png}" alt="" class="bike-image">
         </div>
 
         <div class = "form">
@@ -51,14 +51,14 @@
             </div>
 
             <div class="login-container">
-                <form class="login-form">
+                <form class="login-form" th:method="post" th:action="@{/login}">
                     <div class="text-input-container">
-                        <input type="email" placeholder="Enter your email..." class="text-input" onkeyup="validateEmail('text-input', 0)">
+                        <input type="email" placeholder="Enter your email..." name="email" class="text-input" onkeyup="validateEmail('text-input', 0)" onfocus="validateEmail('text-input', 0)">
                         <i class="fas fa-envelope fa-xs"></i>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Enter your password..." class="password-input" onkeyup="validatePassword('password-input', 0)">
+                        <input type="password" placeholder="Enter your password..." name="password" class="password-input" onkeyup="validatePassword('password-input', 0)" onfocus="validatePassword('password-input', 0)">
                         <i class="fas fa-lock fa-xs"></i>
                         <button class="show-password-button" type="button" onclick="showPassword(0)"><i class="fa fa-eye"></i></button>
                     </div>
@@ -67,7 +67,7 @@
                         <a href="#" class="forgot">Recover Password</a>
                     </div>
 
-                    <button type="submit" class="submit" style="margin-top: 29px">SIGN IN</button>
+                    <button type="button" class="submit" style="margin-top: 29px" onclick="validateSignIn()">SIGN IN</button>
                 </form>
 
                 <div class="or">
@@ -82,29 +82,29 @@
                 <form class="signup-form" th:method="post" th:action="@{/save}" th:object="${user}">
                     <div class="text-input-container-short">
                         <div class="text-input-container">
-                           <input type="text" placeholder="First Name..." class="text-input" th:field="*{fName}" onkeyup="validateName('text-input', 1)">
+                           <input type="text" placeholder="First Name..." class="text-input" th:field="*{fName}" onkeyup="validateName('text-input', 1)" onfocus="validateName('text-input', 1)">
                             <i class="fas fa-user fa-xs"></i>
                         </div>
 
                         <div class="text-input-container">
-                           <input type="text" placeholder="Last Name..." class="text-input" th:field="*{lName}" onkeyup="validateName('text-input', 2)">
+                           <input type="text" placeholder="Last Name..." class="text-input" th:field="*{lName}" onkeyup="validateName('text-input', 2)" onfocus="validateName('text-input', 2)">
                             <i class="fas fa-user fa-xs"></i>
                         </div>
                     </div>
 
                     <div class="text-input-container">
-                        <input type="email" placeholder="Enter your email..." class="text-input" th:field="*{email}" onkeyup="validateEmail('text-input', 3)">
+                        <input type="email" placeholder="Enter your email..." class="text-input" th:field="*{email}" onkeyup="validateEmail('text-input', 3)" onfocus="validateEmail('text-input', 3)">
                         <i class="fas fa-envelope fa-xs"></i>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Create a password..." class="password-input" th:field="*{password}" onkeyup="validatePassword('password-input', 1)">
+                        <input type="password" placeholder="Create a password..." class="password-input" th:field="*{password}" onkeyup="validatePassword('password-input', 1)" onfocus="validatePassword('password-input', 1)">
                         <i class="fas fa-lock fa-xs"></i>
                         <button class="show-password-button" type="button" onclick="showPassword(1)"><i class="fas fa-eye"></i></button>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Confirm password..." class="password-input" onkeyup="validatePassword('password-input', 2)">
+                        <input type="password" placeholder="Confirm password..." class="password-input" onkeyup="validatePassword('password-input', 2)" onfocus="validatePassword('password-input', 2)">
                         <i class="fas fa-lock fa-xs"></i>
                         <button class="show-password-button" type="button" onclick="showPassword(2)"><i class="fa fa-eye"></i></button>
                     </div>
@@ -153,9 +153,16 @@
                 <img th:src="@{~/images/logos/logoColoured.png}" alt="logo-image">
             </div>
             <div class="paragraph">
-                BikeSapati is a ride renting platform for two-wheelers. On this platform, you can
+                &emsp; &emsp; BikeSapati is a ride renting platform for two-wheelers. On this platform, you can
                 view images, view specifications and rent bikes with different plans for any period of time
-                from a day to a year.
+                from a day to a year. You can view bike brands and specifications for each bike along with prices
+                of each bike for different periods of time. We have tried to incorporate as many features as we can
+                to provide the best service for the user.<br><br>
+                &emsp; &emsp; We value our customers more than anything and are always willing to listen to your
+                complaints and suggestions through feedback page and provide services accordingly. So please feel
+                free to reach out to us through our social media handles or through feedback form from within the
+                app.<br><br>
+                &emsp; &emsp; Thank You!
             </div>
         </div>
     </div>
@@ -168,7 +175,7 @@
         <div class="review-container">
             <div class="box">
                 <div class="img-container">
-                    <img th:src="@{~/images/rabi.jpg}" alt="person1">
+                    <img th:src="@{~/images/home-images/rabi.jpg}" alt="person1">
                 </div>
                 <h2>Rabindra Wagle</h2>
                 <i class="fas fa-star"></i>
@@ -176,12 +183,12 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
-                <p>"I am hero."</p>
+                <p>"Not only I can rent bikes, I can also view details and specifications of each bike before I do so. I love it."</p>
             </div>
 
             <div class="box">
                 <div class="img-container">
-                    <img th:src="@{~/images/aashu.jpg}" alt="person1">
+                    <img th:src="@{~/images/home-images/aashu.jpg}" alt="person1">
                 </div>
                 <h2>Aashutosh Aryal</h2>
                 <i class="fas fa-star"></i>
@@ -189,91 +196,26 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
-                <p>"I am gay."</p>
+                <p>"I can rent the available bikes for a day or two and return it. Very useful for anyone visiting the valley for a day or week."</p>
             </div>
 
             <div class="box">
                 <div class="img-container">
-                    <img th:src="@{~/images/aashu.jpg}" alt="person1">
+                    <img th:src="@{~/images/home-images/sangay.jpg}" alt="person1">
                 </div>
-                <h2>Aashutosh Aryal</h2>
+                <h2>Sangya Koirala</h2>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
-                <p>"I am gay."</p>
+                <p>"This website was a lot helpful for me. I could easily explore my options and rent bikes anywhere from a day to a year."</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="footer" style="margin-top: 0">
-            <div class="upper-part">
-
-                <div class="categories" style="flex: 1;">
-                    <p class="title">Useful Links</p>
-                    <div class="links">
-                        <a href="https://www.honda.com.np/" class="category-link" target="_blank">Honda</a>
-                        <a href="https://nepal.globalbajaj.com/en" class="category-link" target="_blank">Bajaj</a>
-                        <a href="https://suzukimotorcycle.com.np/" class="category-link" target="_blank">Suzuki</a>
-                        <a href="https://ngmhero.com/" class="category-link" target="_blank">Hero</a>
-                        <a href="https://tvsnepal.com/" class="category-link" target="_blank">TVS</a>
-                        <a href="https://www.ktm.com/en-np.html" class="category-link" target="_blank">KTM</a>
-                        <a href="https://www.benelli.com/np-en" class="category-link" target="_blank">Benelli</a>
-                        <a href="https://yatrimotorcycles.com/" class="category-link" target="_blank">Yatri</a>
-                        <a href="https://vmotosoco.com.np/" class="category-link" target="_blank">Super Soco</a>
-                    </div>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="description">
-                    <p class="title">Bike Sapati</p>
-                    <p class="description">BikeSapati is a ride renting platform for two-wheelers. On this platform, you can
-                        view images, view specifications and rent bikes with different plans for any period of time
-                        from a day to a year.</p>
-
-                    <div class="socials">
-                        <div class="social-link">
-                            <a href="https://www.facebook.com/avyash.adh/" target="_blank"><img th:src="@{~/images/social-media/facebook.svg}" alt="Facebook"></a>
-                        </div>
-
-                        <div class="social-link">
-                            <a href="https://www.instagram.com/abhyas.adh/" target="_blank"><img th:src="@{~/images/social-media/instagram.svg}" alt="Instagram"></a>
-                        </div>
-
-                        <div class="social-link">
-                            <a href="https://www.linkedin.com/in/abhyas-adh/" target="_blank"><img th:src="@{~/images/social-media/LinkedIn.svg}" alt="LinkedIn"></a>
-                        </div>
-
-                        <div class="social-link">
-                            <a href="https://github.com/abhyasadh" target="_blank"><img th:src="@{~/images/social-media/Github.svg}" alt="Github"></a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class ="contact">
-                    <p class="title">Contact Us</p>
-                    <div class="dropdown-element"><img th:src="@{~/images/contact/phone_outline.svg}" class="element-image" alt="Phone">9841234567, 01-4412345<br></div>
-                    <div class="dropdown-element"><img th:src="@{~/images/contact/mail.svg}" class="element-image" alt="Mail"><a href="mailto: adhikari.abhyash@gmail.com" style="color: white">adhikari.abhyash@gmail.com</a><br></div>
-                    <div class="dropdown-element"><img th:src="@{~/images/contact/location_outline.svg}" class="element-image" alt="Location">Dillibazar, Kathmandu<br></div>
-                </div>
-            </div>
-
-            <div class="copyright">
-                <div class = "logo">
-                    <img th:src="@{~/images/logos/softwaricalogo.png}" height="46px" alt="Softwarica Logo">
-                </div>
-                <div class="text">
-                    © Copyright 2022 - Designed and Developed by <b>Abhyas Adhikari</b>.
-                </div>
-
-            </div>
-        </div>
+        <div th:replace="~{fragments/footer.html :: footer}"></div>
     </footer>
 </body>
 </html>

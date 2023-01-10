@@ -1,18 +1,23 @@
 package com.system.bike_rental_system.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @SequenceGenerator(name = "cms_user_seq_gen", sequenceName = "cms_user_id_seq", allocationSize = 1)
@@ -25,10 +30,64 @@ public class User {
     @Column(nullable = false)
     private String lName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
+
+    @Column(unique = true)
+    private String mobileNo;
+
+    @Column()
+    private String address;
+
+    @Column(columnDefinition = "varchar(255) default '/images/user-images/user.png'")
+    private String image;
+
+    @Column()
+    private String citizenshipF;
+
+    @Column()
+    private String citizenshipB;
+
+    @Column()
+    private String license;
+
+    @Column(columnDefinition = "varchar(255) default 'Not Submitted'")
+    private String status;
+
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
 

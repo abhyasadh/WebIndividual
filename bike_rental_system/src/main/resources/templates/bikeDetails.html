@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{~/css/application.css}" rel="stylesheet">
+
+  <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Rammetto+One' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Blinker' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+  <title th:text="${bike.bikeName}+' || BikeSapati'"></title>
+</head>
+<body>
+
+<header>
+  <div th:replace="~{fragments/searchBar.html :: search-bar-normal}"></div>
+</header>
+
+<article>
+  <div class="middle">
+    <div class="bike-details-container">
+      <div class="bike-image-container">
+        <img th:src="@{~/images/bikes/Bajaj_Pulsar.jpg}">
+      </div>
+      <div class="bike-data-container">
+
+      </div>
+    </div>
+  </div>
+</article>
+/* width: 208px;
+height: 164px; */
+
+<footer>
+  <div th:replace="~{fragments/footer.html :: footer}"></div>
+</footer>
+
+</body>
+</html>

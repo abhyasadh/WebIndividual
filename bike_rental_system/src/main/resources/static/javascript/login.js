@@ -51,14 +51,18 @@ function validateEmail(element, index){
     if (!mail.match(mailReg) || mail === "") {
         if (index!==0) {
             document.getElementsByClassName("fas fa-envelope fa-xs").item(index - 2).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index - 2).innerHTML="<span class='toolTipTextInvalid'>Invalid email format!</span>";
         } else {
             document.getElementsByClassName("fas fa-envelope fa-xs").item(index).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid'>Invalid email format!</span>";
         }
     } else {
         if (index!==0) {
             document.getElementsByClassName("fas fa-envelope fa-xs").item(index - 2).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index - 2).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         } else {
             document.getElementsByClassName("fas fa-envelope fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-envelope fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         }
     }
 }
@@ -67,8 +71,10 @@ function validateName(element, index){
     let name = document.getElementsByClassName(element).item(index).value;
     if (name===""){
         document.getElementsByClassName("fas fa-user fa-xs").item(index-1).style.color="#e53e3e";
+        document.getElementsByClassName("fas fa-user fa-xs").item(index-1).innerHTML="<span class='toolTipTextInvalid'>Name can't be empty!</span>"
     } else {
         document.getElementsByClassName("fas fa-user fa-xs").item(index-1).style.color="#71cc35";
+        document.getElementsByClassName("fas fa-user fa-xs").item(index-1).innerHTML="<span class='toolTipTextValid'>Accepted!</span>"
     }
 }
 
@@ -76,22 +82,40 @@ function validatePassword(element, index){
     let password = document.getElementsByClassName(element).item(index).value;
     const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (index===0){
-        if (password.length>=8){
+        if (password.length>=1){
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Password can't be empty!</span>"
         }
     } else if (index===1) {
         if (!password.match(passwordReg)) {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML=
+                "<span class='toolTipTextInvalid' style='width: 256px; margin-left: -128px'>Password must contain at least one uppercase character, one lowercase character, one number and one special character!</span>";
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         }
     } else if (index===2){
         if (password!==document.getElementsByClassName(element).item(1).value){
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid' style='width: 140px; margin-left: -70px'>Passwords don't match!</span>"
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>"
         }
     }
+}
+
+function validateSignIn(){
+    let icons = [document.getElementsByClassName("fas fa-envelope fa-xs").item(0), document.getElementsByClassName("fas fa-lock fa-xs").item(0)];
+    for (let i=0; i<2; i++){
+        if (icons[i].style.color==="rgb(229, 62, 62)"){
+            alert("Invalid Email or Password");
+            return;
+        }
+    }
+    document.getElementsByClassName("submit").item(0).type="submit";
 }

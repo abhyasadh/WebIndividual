@@ -1,8 +1,8 @@
 .head{
-    background-color: #f17300; 
+    background-color: #f17300;
     position: fixed;
-    top: 0; 
-    left:0; 
+    top: 0;
+    left:0;
     width: 100%;
     height: 70px;
     display: flex;
@@ -61,7 +61,7 @@
 .head .profile{
     align-items: center;
     justify-content: center;
-    flex: 1.5; 
+    flex: 1.5;
     padding-right: 2%;
 }
 
@@ -102,7 +102,7 @@
     padding-bottom: 6px;
 }
 
-.head .profile .left-align-profile .drop-down-profile .dropdown-element { 
+.head .profile .left-align-profile .drop-down-profile .dropdown-element {
     align-content: center;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -299,7 +299,6 @@ h3{
     border: 1px solid #a9cfee;
     border-radius: 50%;
     background-color: #a9cfee;
-    
 }
 
 .middle .display-items .items-container .items .item:hover{
@@ -340,6 +339,7 @@ h3{
     width: 208px;
     height: 164px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .middle .display-items .items-container .items .item .item-image .image-details{
@@ -373,7 +373,7 @@ h3{
 }
 
 .middle .display-items .items-container .items .item .item-image:hover .image-details{
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .middle .display-items .items-container .items .item .bike-name{
