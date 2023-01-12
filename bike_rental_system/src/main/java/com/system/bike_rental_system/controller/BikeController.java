@@ -27,6 +27,10 @@ public class BikeController {
         model.addAttribute("loggedUser", userService.findByEmail(principal.getName()));
         Bike bike = bikeService.fetchById(id);
         model.addAttribute("bike", new BikePojo(bike));
+
+        List<Bike> similarBike = bikeService.similarBikes(bike.getCategory().getId(), bike.getId());
+        model.addAttribute("similarBikes", similarBike);
+
         return "bikeDetails";
     }
 }

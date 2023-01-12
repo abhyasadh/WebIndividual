@@ -26,6 +26,7 @@
                         <div class="position" th:each="rented:${mostRented}">
                             <span></span>
                             <div class="item">
+                                <a th:href="@{~/bike/}+${rented.id}" style="text-decoration: none">
                                 <div class="item-image">
                                     <img th:src="${rented.bikeImage}">
                                     <div class="image-details">
@@ -38,6 +39,7 @@
                                 <hr style="width:90%">
                                 <div class="bike-brand" th:text="${rented.brandName}"></div>
                                 <div class="bike-name" th:text="${rented.bikeName}"></div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +48,7 @@
 
                 <div th:each="element : ${categoryBike}" class="items-container">
                     <div class="topic">
-                        <div class="see-more">
+                        <div th:if="${element.value.size()>8}" class="see-more">
                             <a th:href="@{~/category/}+${element.key.id}">
                                 <u>See All</u> ⮞</a>
                         </div>
@@ -54,18 +56,20 @@
                     </div>
                     <div class="items">
                         <div th:each="bike : ${element.value}" class="item">
-                            <div class="item-image">
+                            <a th:href="@{~/bike/}+${bike.id}" style="text-decoration: none">
+                            <div class="item-image" style="display: block">
                                 <img th:src="${bike.bikeImage}">
                                 <div class="image-details">
                                     <h4 style="margin-bottom:4px; margin-top:0">Choose a Plan: </h4>
-                                    <button class="image-prices" th:text="'Rs. '+${bike.priceDay}+' / Day'"></button>
-                                    <button class="image-prices" th:text="'Rs. '+${bike.priceMonth}+' / Month'"></button>
-                                    <button class="image-prices" th:text="'Rs. '+${bike.priceYear}+' / Year'"></button>
+                                    <button class="image-prices" type="button" th:text="'Rs. '+${bike.priceDay}+' / Day'"></button>
+                                    <button class="image-prices" type="button" th:text="'Rs. '+${bike.priceMonth}+' / Month'"></button>
+                                    <button class="image-prices" type="button" th:text="'Rs. '+${bike.priceYear}+' / Year'"></button>
                                 </div>
                             </div>
                             <hr style="width:90%">
                             <div class="bike-brand" th:text="${bike.brandName}"></div>
                             <div class="bike-name" th:text="${bike.bikeName}"></div>
+                            </a>
                         </div>
                     </div>
                     <hr>

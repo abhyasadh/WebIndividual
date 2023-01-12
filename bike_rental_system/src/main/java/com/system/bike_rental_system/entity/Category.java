@@ -19,4 +19,6 @@ public class Category {
     private Integer id;
     @Column
     private String categoryName;
+    @Column
+    private String categoryDescription;
 }

@@ -6,7 +6,7 @@ import com.system.bike_rental_system.services.BikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,32 @@ public class BikeServiceImpl implements BikeService {
 
     @Override
     public List<Bike> fetchByCategory(Integer categoryId) {
-        return bikeRepo.find10ByCategory(categoryId).orElseThrow(()->new RuntimeException("Not Found"));
+        List<Bike> allBikes = bikeRepo.findAllByCategory(categoryId).orElseThrow(()->new RuntimeException("Not Found"));
+        List<Bike> requiredBikes = new ArrayList<>();
+        for (int i=0; i<8 && i<allBikes.size(); i++){
+            requiredBikes.add(allBikes.get(i));
+        }
+        return requiredBikes;
+    }
+
+    @Override
+    public List<Bike> similarBikes(Integer categoryId, Integer bikeId) {
+        List<Bike> allBikes = bikeRepo.findAllByCategory(categoryId).orElseThrow(()->new RuntimeException("Not Found"));
+
+        for (int i=0; i<allBikes.size(); i++){
+            if (Objects.equals(allBikes.get(i).getId(), bikeId)){
+                allBikes.remove(i);
+                break;
+            }
+        }
+
+        Collections.shuffle(allBikes);
+
+        List<Bike> requiredBikes = new ArrayList<>();
+        for (int i=0; i<4 && i<allBikes.size(); i++){
+            requiredBikes.add(allBikes.get(i));
+        }
+        return requiredBikes;
     }
 
     @Override

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link th:href="@{~/css/application.css}" rel="stylesheet">
+  <link th:href="@{~/css/bike.css}" rel="stylesheet">
 
   <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Rammetto+One' rel='stylesheet'>
@@ -22,18 +23,99 @@
 
 <article>
   <div class="middle">
-    <div class="bike-details-container">
-      <div class="bike-image-container">
-        <img th:src="@{~/images/bikes/Bajaj_Pulsar.jpg}">
-      </div>
-      <div class="bike-data-container">
+    <div class="display-items" style="width: 100%;">
+      <div class="items-container">
+        <div class="topic">
+          <div class="see-more">
+            <a th:href="@{/home}">⮜ <u>Back</u></a>
+          </div>
+          <span th:text="${bike.brandName}" class="desc"></span>
+        </div>
+        <h3 th:text="${bike.bikeName}"></h3>
+        <div class="bike-details-container">
+          <div class="bike-image-container">
+            <img th:src="${bike.bikeImage}">
+          </div>
+          <div class="bike-data-container">
+            <div class="specifications">
+              <h2><u>Specifications</u></h2>
 
+              <div class="field-container">
+                <div th:if="${bike.category.id==6}" class="headings">Range</div>
+                <div th:unless="${bike.category.id==6}" class="headings">Mileage</div>
+                <div class="divider"></div>
+                <div class="data"><u th:text="${bike.mileage}"></u></div>
+              </div>
+
+              <div class="field-container">
+                <div th:if="${bike.category.id==6}" class="headings">Motor</div>
+                <div th:unless="${bike.category.id==6}" class="headings">Engine</div>
+                <div class="divider"></div>
+                <div class="data"><u th:text="${bike.power}"></u></div>
+              </div>
+
+              <div class="field-container">
+                <div class="headings">Top Speed</div>
+                <div class="divider"></div>
+                <div class="data"><u th:text="${bike.topSpeed}+' km/hr'"></u></div>
+              </div>
+
+              <div class="field-container">
+                <div class="headings">Transmission</div>
+                <div class="divider"></div>
+                <div class="data"><u  th:text="${bike.transmission}"></u></div>
+              </div>
+
+              <div class="field-container">
+                <div th:if="${bike.category.id==6}" class="headings">Battery</div>
+                <div th:unless="${bike.category.id==6}" class="headings">Tank Capacity</div>
+                <div class="divider"></div>
+                <div class="data"><u th:text="${bike.tankCapacity}"></u></div>
+              </div>
+
+              <div class="field-container">
+                <div class="headings">Max Torque</div>
+                <div class="divider"></div>
+                <div class="data"><u th:text="${bike.maxTorque}"></u></div>
+              </div>
+            </div>
+
+            <div class="divider" style="margin-top: 24px; margin-bottom: 24px;"></div>
+
+            <div class="prices">
+              <p><u>Make it yours for just:</u></p>
+              <button class="price" th:text="'Rs. '+${bike.priceDay}+' / Day'"></button>
+              <button class="price" th:text="'Rs. '+${bike.priceMonth}+' / Month'"></button>
+              <button class="price" th:text="'Rs. '+${bike.priceYear}+' / Year'"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="similar-container" th:object="${similarBikes}" style="margin-bottom: 30px">
+          <h2 style="padding-left: 4%; margin-top: 42px;">More Options to Consider</h2>
+          <div class="items" style="padding-top: 0;">
+            <div class="item" th:each="item:${similarBikes}">
+              <a th:href="@{~/bike/}+${item.id}" style="text-decoration: none">
+              <div class="item-image">
+                <img th:src="${item.bikeImage}">
+                <div class="image-details">
+                  <h4 style="margin-bottom:4px; margin-top:0">Choose a Plan: </h4>
+                  <button class="image-prices" th:text="'Rs. '+${item.priceDay}+' / Day'"></button>
+                  <button class="image-prices" th:text="'Rs. '+${item.priceMonth}+' / Month'"></button>
+                  <button class="image-prices" th:text="'Rs. '+${item.priceYear}+' / Year'"></button>
+                </div>
+              </div>
+              <hr style="width:90%">
+              <div class="bike-brand" th:text="${item.brandName}"></div>
+              <div class="bike-name" th:text="${item.bikeName}"></div>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </article>
-/* width: 208px;
-height: 164px; */
 
 <footer>
   <div th:replace="~{fragments/footer.html :: footer}"></div>

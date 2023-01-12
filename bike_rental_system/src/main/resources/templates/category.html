@@ -20,9 +20,10 @@
           <div class="see-more">
             <a th:href="@{/home}">⮜ <u>Back</u></a>
           </div><h3 th:text="${category.categoryName}"></h3></div>
-        <span class="desc">Description of Bike Category</span>
+        <span th:text="${category.categoryDescription}" class="desc"></span>
         <div class="items">
           <div class="item" th:each="bike:${bikeList}">
+            <a th:href="@{~/bike/}+${rented.id}" style="text-decoration: none">
             <div class="item-image">
               <img th:src="${bike.bikeImage}">
               <div class="image-details">
@@ -35,6 +36,7 @@
             <hr style="width:90%">
             <div class="bike-brand" th:text="${bike.brandName}"></div>
             <div class="bike-name" th:text="${bike.bikeName}"></div>
+            </a>
           </div>
         </div>
       </div>

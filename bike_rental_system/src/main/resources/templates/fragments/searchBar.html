@@ -28,8 +28,7 @@
     <div class = left-align-profile>
       <div class="profile-div">
         <div class="picture">
-          <div class="profile-head"></div>
-          <div class="profile-body"></div>
+          <img th:attr="src=${loggedUser.image}">
         </div>
         <a th:href="@{~/account}" class="profile-link"><span th:text="${loggedUser.fName}+' '+${loggedUser.lName}"></span></a>
       </div>
@@ -75,8 +74,7 @@
     <div class = left-align-profile>
       <div class="profile-div">
         <div class="picture">
-          <div class="profile-head"></div>
-          <div class="profile-body"></div>
+          <img th:attr="src=${loggedUser.image}">
         </div>
         <a th:href="@{~/account}" class="profile-link"><span th:text="${loggedUser.fName}+' '+${loggedUser.lName}"></span></a>
       </div>
