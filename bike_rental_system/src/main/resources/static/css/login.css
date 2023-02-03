@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 .head-login{
@@ -137,7 +138,7 @@ i {
     cursor: pointer;
 }
 
-i .toolTipTextInvalid, i .toolTipTextValid {
+.toolTipTextInvalid, .toolTipTextValid {
     opacity: 0;
     visibility: hidden;
     width: 120px;
@@ -155,17 +156,21 @@ i .toolTipTextInvalid, i .toolTipTextValid {
     transition: visibility 0s, opacity 0.4s ease-in-out;
 }
 
-i .toolTipTextInvalid {
+.no-image .toolTipTextValid, .no-image .toolTipTextInvalid{
+    top: 101%;
+}
+
+.toolTipTextInvalid {
     background-color: #e53e3e;
 }
 
-i .toolTipTextValid {
+.toolTipTextValid {
     background-color: #71cc35;
     width: 60px;
     margin-left: -30px;
 }
 
-i .toolTipTextInvalid::after, i .toolTipTextValid::after {
+.toolTipTextInvalid::after, .toolTipTextValid::after {
     content: "";
     position: absolute;
     bottom: 100%;
@@ -176,7 +181,7 @@ i .toolTipTextInvalid::after, i .toolTipTextValid::after {
     border-color: transparent transparent #e53e3e transparent;
 }
 
-i .toolTipTextValid::after {
+.toolTipTextValid::after {
     border-color: transparent transparent #71cc35 transparent;
 }
 
@@ -194,10 +199,9 @@ input ~ i {
 
 input:focus ~ i {
     color: #e53e3e;
-    /*color: #71cc35; green*/
 }
 
-.form-container .form .login-container .or {
+.or {
     display: flex;
     width: 100%;
     height: 19px;
@@ -206,7 +210,7 @@ input:focus ~ i {
     margin-top: 22px;
 }
 
-.form-container .form .login-container .or hr{
+.or hr{
     width: 40%;
     border-radius: 5px;
 }
@@ -233,7 +237,7 @@ input:focus ~ i {
     gap: 20px;
 }
 
-.form-container .form .text-input, .settings-container .security-container .email-field .change-email .text-input-container .text-input, .otp-input{
+.form-container .form .text-input{
     width: 100%;
     height: 38px;
     border: none;
@@ -243,11 +247,11 @@ input:focus ~ i {
     border-radius: 8px;
 }
 
-.form-container .form .text-input:focus, .settings-container .security-container .email-field .change-email .text-input-container .text-input:focus{
+.form-container .form .text-input:focus{
     outline: none;
 }
 
-.form-container .form .password-input-container, .settings-container .security-container .password-field .change-password .password-input-container {
+.form-container .form .password-input-container, .settings-container .security-container .password-input-container {
     width: 100%;
     display: flex;
     border-radius: 8px;
@@ -257,7 +261,7 @@ input:focus ~ i {
     margin-top: 20px;
 }
 
-.form-container .form .password-input, .settings-container .security-container .password-field .change-password .password-input-container .password-input{
+.form-container .form .password-input, .settings-container .security-container .password-input-container .password-input{
     width: 100%;
     height: 38px;
     border-radius: 8px;
@@ -266,11 +270,11 @@ input:focus ~ i {
     padding-left: 30px;
 }
 
-.form-container .form .password-input:focus, .settings-container .security-container .password-field .change-password .password-input-container .password-input:focus{
+.form-container .form .password-input:focus, .settings-container .security-container .password-input-container .password-input:focus{
     outline: none;
 }
 
-.form-container .form .show-password-button, .settings-container .security-container .password-field .change-password .password-input-container .show-password-button{
+.form-container .form .show-password-button, .settings-container .security-container .password-input-container .show-password-button{
     width: 28px;
     height: 28px;
     margin-right: 12px;

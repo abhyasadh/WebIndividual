@@ -1,11 +1,10 @@
 package com.system.bike_rental_system.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Data
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -52,16 +51,13 @@ public class Bike {
     private Integer priceDay;
 
     @Column
-    private Integer priceMonth;
-
-    @Column
-    private Integer priceYear;
-
-    @Column
     private Integer availableNo;
 
     @Column
     private String bikeImage;
+
+    @Transient
+    private String bikeImageBase64;
 
     @Column
     private Integer rentedNumber;

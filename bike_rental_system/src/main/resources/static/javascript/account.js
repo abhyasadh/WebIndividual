@@ -1,17 +1,29 @@
 document.getElementsByClassName("remove").item(0).addEventListener("click",
     ()=>{
     document.getElementsByClassName("no-image").item(0)
-        .innerHTML="<img src='/images/user-images/user.png'>";
+        .innerHTML="<img src='../images/drop-down/user.png'>" +
+        "<span class='toolTipTextValid'>Accepted!</span>";
+        fetch("../images/drop-down/user.png")
+            .then(response => response.blob())
+            .then(blob => {
+                const file = new File([blob], 'user.png', { type: 'image/png' });
 
-    document.getElementsByClassName("input-img").item(0).value="";
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById("profile-pic").files = dataTransfer.files;
+            });
+    document.getElementsByClassName("picture-uploader").item(0)
+        .style.border="2px solid #71cc35";
 })
 
 function validateName(index){
     let name = document.getElementsByClassName('text-input').item(index).value;
     if (name===""){
         document.getElementsByClassName("fas fa-user fa-xs").item(index).style.color="#e53e3e";
+        document.getElementsByClassName("fas fa-user fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid'>Name can't be empty!</span>"
     } else {
         document.getElementsByClassName("fas fa-user fa-xs").item(index).style.color="#71cc35";
+        document.getElementsByClassName("fas fa-user fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>"
     }
 }
 
@@ -20,8 +32,10 @@ function validatePhone(){
     let phone = document.getElementsByClassName('text-input').item(2).value;
     if (!phone.match(pattern)){
         document.getElementsByClassName("fas fa-phone fa-xs fa-flip-horizontal").item(0).style.color="#e53e3e";
+        document.getElementsByClassName("fas fa-phone fa-xs fa-flip-horizontal").item(0).innerHTML="<span class='toolTipTextInvalid' style='transform: scale(-1, 1); width: 150px; margin-left: -75px'>Invalid Phone Number!</span>"
     } else {
         document.getElementsByClassName("fas fa-phone fa-xs fa-flip-horizontal").item(0).style.color="#71cc35";
+        document.getElementsByClassName("fas fa-phone fa-xs fa-flip-horizontal").item(0).innerHTML="<span class='toolTipTextValid' style='transform: scale(-1, 1);'>Accepted!</span>"
     }
 }
 
@@ -29,8 +43,11 @@ function validateAddress(){
     let address = document.getElementsByClassName('text-input').item(3).value;
     if (address===""){
         document.getElementsByClassName("fa fa-map-marker-alt fa-xs").item(0).style.color="#e53e3e";
+        document.getElementsByClassName("fa fa-map-marker-alt fa-xs").item(0).innerHTML="<span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Address can't be empty!</span>"
     } else {
         document.getElementsByClassName("fa fa-map-marker-alt fa-xs").item(0).style.color="#71cc35";
+        document.getElementsByClassName("fa fa-map-marker-alt fa-xs").item(0).innerHTML="<span class='toolTipTextValid'>Accepted!</span>"
+
     }
 }
 
@@ -40,22 +57,25 @@ function addImage(){
 
     const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
 
-    if (filePath===""){
-        document.getElementsByClassName("remove").item(0)
-    }
-
     if (!allowedExtensions.exec(filePath)) {
-        document.getElementsByClassName('picture').item(1).style.border="2px solid #e94d4d";
+        document.getElementsByClassName('picture-uploader').item(0).style.border="2px solid #e94d4d";
+        fileInput.value="";
+        document.getElementsByClassName("no-image").item(0)
+            .innerHTML = "<div style='width: 204px; height: 204px'>"+
+            "<span class='toolTipTextInvalid' style='width: 200px; margin-left: -100px; font-weight: 900'>Invalid File Format!<br>Accepted Formats: .jpg, .jpeg, .png</span>"
+
+    } else if (fileInput.files[0].size>5242880){
+        document.getElementsByClassName('picture-uploader').item(0).style.border="2px solid #e94d4d";
+        document.getElementsByClassName("no-image").item(0)
+            .innerHTML = "<img src='" + URL.createObjectURL(event.target.files[0]) + "' alt='Profile Picture'>"+
+            "<span class='toolTipTextInvalid' style='width: 160px; margin-left: -80px; font-weight: 900'>File Too Large!<br>Maximum File Size: 5MB</span>"
+
     } else {
-        document.getElementsByClassName('picture').item(1).style.border="2px solid white"
+        document.getElementsByClassName('picture-uploader').item(0).style.border="2px solid #71cc35"
+        document.getElementsByClassName("no-image").item(0)
+            .innerHTML = "<img src='" + URL.createObjectURL(event.target.files[0]) + "' alt='Profile Picture'>" +
+            "<span class='toolTipTextValid' style='font-weight: 900'>Accepted!</span>"
     }
-
-    document.getElementsByClassName("no-image").item(0)
-        .innerHTML = "<img src='" + URL.createObjectURL(event.target.files[0]) + "' alt='Profile Picture'>"
-}
-
-function printValues(){
-   alert(document.getElementById("profile-pic").value)
 }
 
 function documentsCheck(id, index){
@@ -64,18 +84,14 @@ function documentsCheck(id, index){
 
     const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
 
-    if (filePath===""){
-        if (index===0) document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>Citizenship (Front)";
-        if (index===1) document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>Citizenship (Back)";
-        if (index===2) document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>License";
-        return;
-    }
-
     if (!allowedExtensions.exec(filePath)) {
         document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>Invalid File Format!";
         document.getElementsByClassName("fa fa-address-card fa-xs").item(index).style.color="#e53e3e";
+    } else if (fileInput.files[0].size>5242880){
+        document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>File too large! (Max size: 5MB)";
+        document.getElementsByClassName("fa fa-address-card fa-xs").item(index).style.color="#e53e3e";
     } else {
-        document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>Uploaded!";
+        document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>Uploaded Successfully!";
         document.getElementsByClassName("fa fa-address-card fa-xs").item(index).style.color="#71cc35";
     }
 }
@@ -115,55 +131,35 @@ function validateEmail(index){
 function validatePassword(index){
     let password = document.getElementsByClassName("password-input").item(index).value;
     const passwordReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-    if (index===0){
-        if (password.length>=8){
+    if (index===0||index===3){
+        if (password.length>=1){
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Password can't be empty!</span>"
         }
     } else if (index===1) {
         if (!password.match(passwordReg)) {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML=
+                "<span class='toolTipTextInvalid' style='width: 260px; margin-left: -130px'>Password must be at least 8 characters long with<br>at least one uppercase character, one lowercase character, one number and one special character!</span>";
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         }
     } else if (index===2){
-        if (password!==document.getElementsByClassName("password-input").item(1).value){
+        if (password!==document.getElementsByClassName("password-input").item(1).value||password===""){
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
+
+            if(password!==document.getElementsByClassName("password-input").item(1).value) document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid' style='width: 140px; margin-left: -70px'>Passwords don't match!</span>";
+            else document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Password can't be empty!</span>";
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
+            document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
         }
     }
 }
-
-function validateOTP(){
-    const pattern = "^[0-9]{6}$";
-    let otp = document.getElementsByClassName('text-input').item(5).value;
-
-    if (!otp.match(pattern)){
-        document.getElementsByClassName("fas fa-key fa-xs").item(0).style.color="#e53e3e";
-    } else {
-        document.getElementsByClassName("fas fa-key fa-xs").item(0).style.color="#71cc35";
-    }
-}
-
-function emailChange(){
-    if (document.getElementsByClassName("submit").item(2).innerText==="SEND OTP") {
-
-        let OTP = ""
-        for (let i=0; i<6; i++){
-            OTP+=Math.floor(Math.random()*10);
-        }
-        console.log(OTP)
-
-        document.getElementsByClassName("otp-input-container").item(0).style.display = "flex";
-        document.getElementsByClassName("submit").item(2).innerText = "CONFIRM";
-    } else {
-
-    }
-}
-
-statusUpdate();
 
 function statusUpdate(){
     let status=document.getElementsByTagName("h2").item(0).innerText;
@@ -186,10 +182,12 @@ function statusUpdate(){
         statusClass.style.border = "solid 2px red"
         para.style.fontSize = "12px";
     } else if (status === "Submitted") {
-        para.innerText = "Your documents have been submitted for review. Come back later to check the results.";
+        para.innerText = "Your documents have been submitted for review. Come back later to check the results." +
+            "\n\nPlease note that you can't update your documents until the submitted ones have been reviewed.";
         statusClass.style.color = "black";
         statusClass.style.backgroundColor = "#fff36d";
         statusClass.style.border = "solid 2px #fedd00"
+        para.style.fontSize = "12px";
 
         fields = document.getElementById("citizen-front");
         fields.disabled = true;
@@ -211,3 +209,57 @@ function statusUpdate(){
     }
     statusClass.appendChild(para);
 }
+
+function validateSubmitButton(className, index){
+    let signInForm=document.getElementsByClassName(className).item(0);
+    let invalidFields=signInForm.getElementsByClassName("toolTipTextInvalid");
+
+    if (invalidFields.length!==0){
+        for (let i=0; i<invalidFields.length; i++){
+            invalidFields[i].style.visibility="visible";
+            invalidFields[i].style.opacity="1";
+        }
+    }
+    else if (invalidFields.length===0){
+        document.getElementsByClassName("submit").item(index).type="submit";
+    }
+}
+
+function validateDocumentsSubmit(){
+    let citizenF = document.getElementById('citizen-front');
+    let citizenB = document.getElementById('citizen-back');
+    let license = document.getElementById('license');
+    let flag = false;
+
+    let docArray = [citizenF, citizenB, license];
+
+    for (let i=0; i<docArray.length; i++){
+        if (document.getElementsByClassName("fa fa-address-card fa-xs").item(i).getAttribute("color")==="#e53e3e"){
+            flag=true;
+        }
+
+        if (docArray[i].value===''){
+            document.getElementsByClassName("fa fa-address-card fa-xs").item(i).style.color="#e53e3e";
+            document.getElementsByClassName("document-name").item(i).innerHTML="<i class='fa fa-address-card fa-xs'></i>Document Empty!";
+            flag=true;
+        } else {
+            document.getElementsByClassName("fa fa-address-card fa-xs").item(i).style.color="#71cc35";
+            document.getElementsByClassName("document-name").item(i).innerHTML="<i class='fa fa-address-card fa-xs'></i>Uploaded Successfully!";
+        }
+    }
+    if (!flag){
+        document.getElementsByClassName("submit").item(1).type='submit';
+    }
+}
+
+validateName(0);
+validateName(1);
+validatePhone();
+validateAddress();
+
+validatePassword(0);
+validatePassword(1);
+validatePassword(2);
+validatePassword(3);
+
+statusUpdate();

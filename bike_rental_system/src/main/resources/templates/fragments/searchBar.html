@@ -2,7 +2,9 @@
 
   <!-- Logo Division -->
   <div class="logo-div" style="flex: 1.5;">
-    <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
+    <a th:href="@{/home}">
+      <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
+    </a>
   </div>
 
   <!-- Search Division -->
@@ -27,10 +29,12 @@
   <div class="profile">
     <div class = left-align-profile>
       <div class="profile-div">
+        <a th:href="@{~/account}" class="profile-link">
         <div class="picture">
-          <img th:attr="src=${loggedUser.image}">
+          <img th:src="'data:image/png;base64,'+${loggedUser.imageBase64}">
         </div>
-        <a th:href="@{~/account}" class="profile-link"><span th:text="${loggedUser.fName}+' '+${loggedUser.lName}"></span></a>
+        <span th:text="${loggedUser.fName}+' '+${loggedUser.lName}"></span>
+        </a>
       </div>
       <div style="height: 8px;"></div>
       <div class="drop-down-profile">
@@ -48,7 +52,9 @@
 
   <!-- Logo Division -->
   <div class="logo-div" style="flex: 1.5;">
-    <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
+    <a th:href="@{/home}">
+      <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
+    </a>
   </div>
 
   <!-- Search Division -->
@@ -73,12 +79,14 @@
   <div class="profile">
     <div class = left-align-profile>
       <div class="profile-div">
+        <a th:href="@{~/account}" class="profile-link">
         <div class="picture">
-          <img th:attr="src=${loggedUser.image}">
+          <img th:src="'data:image/png;base64,'+${loggedUser.imageBase64}">
         </div>
-        <a th:href="@{~/account}" class="profile-link"><span th:text="${loggedUser.fName}+' '+${loggedUser.lName}"></span></a>
+        <span th:text="${loggedUser.fName}+' '+${loggedUser.lName}"></span>
+        </a>
       </div>
-      <div style="height: 8px;"></div>
+      <div style="height: 6px;"></div>
       <div class="drop-down-profile">
         <div class="dropdown-element"><a th:href="@{~/account}"><img th:src="@{~/images/drop-down/user.svg}" class="element-image" alt="User">Account Settings</a><br></div>
         <div class="dropdown-element"><a href="#"><img th:src="@{~/images/drop-down/calendar_check.svg}" class="element-image" alt="Reservations">My Reservations</a><br></div>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{~/css/settings.css}" rel="stylesheet">
   <link th:href="@{~/css/application.css}" rel="stylesheet">
   <link th:href="@{~/css/bike.css}" rel="stylesheet">
 
@@ -13,6 +14,15 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{~/images/motorcycle-solid.svg}">
+
+  <script th:src="@{~/javascript/bikeFunctions.js}" defer></script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous">
+  </script>
+
   <title th:text="${bike.bikeName}+' || BikeSapati'"></title>
 </head>
 <body>
@@ -22,6 +32,43 @@
 </header>
 
 <article>
+  <div class="payment-popup">
+    <div class="item">
+      <div class="item-image">
+        <img th:src="'data:image/png;base64,'+${bike.bikeImageBase64}">
+      </div>
+      <hr style="width:90%">
+      <div class="bike-brand" th:text="${bike.brandName}"></div>
+      <div class="bike-name" th:text="${bike.bikeName}"></div>
+    </div>
+    <div class="booking-period">
+      <h3 style="margin-top: 2px; margin-bottom: 20px; font-size: 30px">Confirm Booking</h3>
+      <form class="popup-field-container" th:method="post" th:action="@{/book}" th:object="${booking}">
+        <input hidden type="text" id="bike-id" name="bikeId" th:value="${bike.id}">
+        <input hidden type="text" id="user-id" name="userId" th:value="${loggedUser.id}">
+        <div class="field-container" style="width: 100%">
+          <div class="headings">From:</div>
+          <input type="date" class="date-input" th:attr="onclick=|priceSetter(${bike.priceDay})|" th:field="*{bookingDate}">
+        </div>
+
+        <div class="field-container" style="width: 100%">
+          <div class="headings">To:</div>
+          <input type="date" class="date-input" th:attr="onclick=|priceSetter(${bike.priceDay})|" th:field="*{releaseDate}">
+        </div>
+
+        <div class="field-container" style="width: 100%">
+          <div class="headings">Price:</div>
+          <input type="text" disabled class="date-input" id="priceField">
+        </div>
+
+        <div class="submit-div" style="margin-top: 10px; margin-bottom: 0">
+          <button type="submit" class="submit">CONFIRM</button>
+          <button type="button" class="submit" onclick="bookingForm(0)" style="background-color: rgb(233, 77, 77); border: 2px solid red">CANCEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="middle">
     <div class="display-items" style="width: 100%;">
       <div class="items-container">
@@ -34,7 +81,7 @@
         <h3 th:text="${bike.bikeName}"></h3>
         <div class="bike-details-container">
           <div class="bike-image-container">
-            <img th:src="${bike.bikeImage}">
+            <img th:src="'data:image/png;base64,'+${bike.bikeImageBase64}">
           </div>
           <div class="bike-data-container">
             <div class="specifications">
@@ -83,10 +130,11 @@
             <div class="divider" style="margin-top: 24px; margin-bottom: 24px;"></div>
 
             <div class="prices">
-              <p><u>Make it yours for just:</u></p>
-              <button class="price" th:text="'Rs. '+${bike.priceDay}+' / Day'"></button>
-              <button class="price" th:text="'Rs. '+${bike.priceMonth}+' / Month'"></button>
-              <button class="price" th:text="'Rs. '+${bike.priceYear}+' / Year'"></button>
+              <p><u>Choose an option:</u></p>
+              <input hidden class="priceInvisible" th:value="${bike.priceDay}">
+              <button class="price" th:text="${bike.priceDay}" onclick="bookingForm(1)"></button>
+              <button class="price" th:text="${bike.priceDay} + (0.8*${bike.priceDay}*6) + (0.6*${bike.priceDay}*23)" onclick="bookingForm(30)"></button>
+              <button class="price" th:text="${bike.priceDay} + (0.8*${bike.priceDay}*6) + (0.6*${bike.priceDay}*23) + (0.5*${bike.priceDay}*92) + (0.4*${bike.priceDay}*243)" onclick="bookingForm(365)"></button>
             </div>
           </div>
         </div>
@@ -97,12 +145,34 @@
             <div class="item" th:each="item:${similarBikes}">
               <a th:href="@{~/bike/}+${item.id}" style="text-decoration: none">
               <div class="item-image">
-                <img th:src="${item.bikeImage}">
+                <img th:src="'data:image/png;base64,'+${item.bikeImageBase64}">
                 <div class="image-details">
-                  <h4 style="margin-bottom:4px; margin-top:0">Choose a Plan: </h4>
-                  <button class="image-prices" th:text="'Rs. '+${item.priceDay}+' / Day'"></button>
-                  <button class="image-prices" th:text="'Rs. '+${item.priceMonth}+' / Month'"></button>
-                  <button class="image-prices" th:text="'Rs. '+${item.priceYear}+' / Year'"></button>
+                  <h4 style="margin-bottom:14px; margin-top:0">Bike Specifications:</h4>
+                  <div class="field-container">
+                    <div th:if="${item.category.id==6}" class="headings">Range</div>
+                    <div th:unless="${item.category.id==6}" class="headings">Mileage</div>
+                    <div class="divider"></div>
+                    <div class="data"><u th:text="${item.mileage}"></u></div>
+                  </div>
+
+                  <div class="field-container">
+                    <div class="headings">Top Speed</div>
+                    <div class="divider"></div>
+                    <div class="data"><u th:text="${item.topSpeed}+' km/hr'"></u></div>
+                  </div>
+
+                  <div class="field-container">
+                    <div th:if="${item.category.id==6}" class="headings">Motor</div>
+                    <div th:unless="${item.category.id==6}" class="headings">Engine</div>
+                    <div class="divider"></div>
+                    <div class="data"><u th:text="${item.power}"></u></div>
+                  </div>
+
+                  <div class="field-container">
+                    <div class="headings">Price</div>
+                    <div class="divider"></div>
+                    <div class="data"><u th:text="'Rs. '+${item.priceDay}+' / Day'"></u></div>
+                  </div>
                 </div>
               </div>
               <hr style="width:90%">

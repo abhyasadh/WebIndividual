@@ -1,6 +1,7 @@
 package com.system.bike_rental_system.controller;
 
 import com.system.bike_rental_system.entity.User;
+import com.system.bike_rental_system.pojo.PasswordChangePojo;
 import com.system.bike_rental_system.pojo.UserPojo;
 import com.system.bike_rental_system.services.UserService;
 import jakarta.validation.Valid;
@@ -8,11 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -47,20 +51,22 @@ public class UserController {
     }
 
     @PostMapping("/updateGeneral/{id}")
-    public String updateGeneral(@Valid UserPojo userPojo, @RequestParam("image") MultipartFile image){
-        userService.updateGeneral(userPojo, image);
-        return "redirect:/";
+    public String updateGeneral(@Valid UserPojo userPojo) throws IOException {
+        userService.updateGeneral(userPojo);
+        return "redirect:/account";
     }
 
     @PostMapping("/updateDocs/{id}")
-    public String updateDocs(@PathVariable Integer id, @RequestParam("citizenshipF") MultipartFile citizenF, @RequestParam("citizenshipB") MultipartFile citizenB, @RequestParam("license") MultipartFile license){
-        userService.updateDocs(id, citizenF, citizenB, license);
+    public String updateDocs(@Valid UserPojo userPojo) throws IOException {
+        userService.updateDocs(userPojo);
         return "redirect:/account";
     }
 
     @GetMapping("/account")
     public String getPage(Model model, Principal principal){
-        model.addAttribute("loggedUser", userService.findByEmail(principal.getName()));
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("loggedUser", user);
+        model.addAttribute("passwordChangePojo", new PasswordChangePojo());
         return "accountDetails";
     }
 
@@ -72,9 +78,27 @@ public class UserController {
         return "/login";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteUser(@PathVariable("id") Integer id){
-//        userService.deleteById(id);
-//        return "redirect:/user/list";
-//    }
+    @PostMapping("/change")
+    public String createUser(@Valid @ModelAttribute PasswordChangePojo passwordChangePojo, BindingResult bindingResult,
+                             Authentication authentication) {
+        if (authentication.isAuthenticated()) {
+            passwordChangePojo.setEmail(authentication.getName());
+            if (bindingResult.hasErrors()) {
+                return "redirect:/account";
+            }
+            userService.changePassword(passwordChangePojo);
+            SecurityContextHolder.clearContext();
+        }
+        return "redirect:/account";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Integer id, Principal principal){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (encoder.matches("", userService.findByEmail(principal.getName()).getPassword())){
+            userService.deleteAccount(id);
+            return "login";
+        }
+        return "redirect:/account";
+    }
 }

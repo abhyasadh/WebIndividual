@@ -36,6 +36,8 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/login", "/logout", "/save")
                 .permitAll()
+                .requestMatchers("/admin/**")
+                .hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

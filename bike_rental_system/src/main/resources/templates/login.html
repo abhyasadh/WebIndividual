@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{~/images/motorcycle-solid.svg}">
+
     <script th:src="@{~/javascript/login.js}" defer></script>
     <title>Login || BikeSapati</title>
 </head>
@@ -53,12 +55,12 @@
             <div class="login-container">
                 <form class="login-form" th:method="post" th:action="@{/login}">
                     <div class="text-input-container">
-                        <input type="email" placeholder="Enter your email..." name="email" class="text-input" onkeyup="validateEmail('text-input', 0)" onfocus="validateEmail('text-input', 0)">
+                        <input type="email" placeholder="Enter your email..." name="email" class="text-input" onkeyup="validateEmail('text-input', 0)">
                         <i class="fas fa-envelope fa-xs"><span class='toolTipTextInvalid'>Email can't be empty!</span></i>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Enter your password..." name="password" class="password-input" onkeyup="validatePassword('password-input', 0)" onfocus="validatePassword('password-input', 0)">
+                        <input type="password" placeholder="Enter your password..." name="password" class="password-input" onkeyup="validatePassword('password-input', 0)">
                         <i class="fas fa-lock fa-xs"><span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Password can't be empty!</span></i>
                         <button class="show-password-button" type="button" onclick="showPassword(0)"><i class="fa fa-eye"></i></button>
                     </div>
@@ -67,7 +69,7 @@
                         <a href="#" class="forgot">Recover Password</a>
                     </div>
 
-                    <button type="button" class="submit" style="margin-top: 29px" onclick="validateSignIn()">SIGN IN</button>
+                    <button type="button" class="submit" style="margin-top: 29px" onclick="validateSubmitButton('login-form', 0)">SIGN IN</button>
                 </form>
 
                 <div class="or">
@@ -82,34 +84,34 @@
                 <form class="signup-form" th:method="post" th:action="@{/save}" th:object="${user}">
                     <div class="text-input-container-short">
                         <div class="text-input-container">
-                           <input type="text" placeholder="First Name..." class="text-input" th:field="*{fName}" onkeyup="validateName('text-input', 1)" onfocus="validateName('text-input', 1)">
+                           <input type="text" placeholder="First Name..." class="text-input" th:field="*{fName}" onkeyup="validateName('text-input', 1)">
                             <i class="fas fa-user fa-xs"><span class='toolTipTextInvalid'>Name can't be empty!</span></i>
                         </div>
 
                         <div class="text-input-container">
-                           <input type="text" placeholder="Last Name..." class="text-input" th:field="*{lName}" onkeyup="validateName('text-input', 2)" onfocus="validateName('text-input', 2)">
+                           <input type="text" placeholder="Last Name..." class="text-input" th:field="*{lName}" onkeyup="validateName('text-input', 2)">
                             <i class="fas fa-user fa-xs"><span class='toolTipTextInvalid'>Name can't be empty!</span></i>
                         </div>
                     </div>
 
                     <div class="text-input-container">
-                        <input type="email" placeholder="Enter your email..." class="text-input" th:field="*{email}" onkeyup="validateEmail('text-input', 3)" onfocus="validateEmail('text-input', 3)">
+                        <input type="email" placeholder="Enter your email..." class="text-input" th:field="*{email}" onkeyup="validateEmail('text-input', 3)">
                         <i class="fas fa-envelope fa-xs"><span class='toolTipTextInvalid'>Email can't be empty!</span></i>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Create a password..." class="password-input" th:field="*{password}" onkeyup="validatePassword('password-input', 1)" onfocus="validatePassword('password-input', 1)">
+                        <input type="password" placeholder="Create a password..." class="password-input" th:field="*{password}" onkeyup="validatePassword('password-input', 1)">
                         <i class="fas fa-lock fa-xs"><span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Password can't be empty!</span></i>
                         <button class="show-password-button" type="button" onclick="showPassword(1)"><i class="fas fa-eye"></i></button>
                     </div>
 
                     <div class="password-input-container">
-                        <input type="password" placeholder="Confirm password..." class="password-input" onkeyup="validatePassword('password-input', 2)" onfocus="validatePassword('password-input', 2)">
+                        <input type="password" placeholder="Confirm password..." class="password-input" onkeyup="validatePassword('password-input', 2)">
                         <i class="fas fa-lock fa-xs"><span class='toolTipTextInvalid' style='width: 150px; margin-left: -75px'>Password can't be empty!</span></i>
                         <button class="show-password-button" type="button" onclick="showPassword(2)"><i class="fa fa-eye"></i></button>
                     </div>
 
-                    <button type="button" onclick="validateSignup()" class="submit">REGISTER</button>
+                    <button type="button" onclick="validateSubmitButton('signup-form', 2)" class="submit">REGISTER</button>
                 </form>
             </div>
 

@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Data
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -42,21 +44,43 @@ public class User implements UserDetails {
     @Column()
     private String address;
 
-    @Column(columnDefinition = "varchar(255) default '/images/user-images/user.png'")
+    @Column(columnDefinition = "varchar(255) default '/user-documents/profile-picture/user.png'")
     private String image;
+
+    @Transient
+    private String imageBase64;
 
     @Column()
     private String citizenshipF;
 
+    @Transient
+    private String citizenshipFBase64;
+
     @Column()
     private String citizenshipB;
+
+    @Transient
+    private String citizenshipBBase64;
 
     @Column()
     private String license;
 
+    @Transient
+    private String licenseBase64;
+
     @Column(columnDefinition = "varchar(255) default 'Not Submitted'")
     private String status;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            foreignKey = @ForeignKey(name = "FK_users_roles_userId"),
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseForeignKey = @ForeignKey(name = "FK_users_roles_roleId"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            uniqueConstraints = @UniqueConstraint(name = "UNIQUE_users_roles_userIdRoleId",
+                    columnNames = {"user_id", "role_id"})
+    )
+    private Collection<Role> roles;
 
 
 

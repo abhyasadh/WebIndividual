@@ -112,8 +112,8 @@ function validatePassword(element, index){
     }
 }
 
-function validateSignIn(){
-    let signInForm=document.getElementsByClassName("login-form").item(0);
+function validateSubmitButton(className, index){
+    let signInForm=document.getElementsByClassName(className).item(0);
     let invalidFields=signInForm.getElementsByClassName("toolTipTextInvalid");
 
     if (invalidFields.length!==0){
@@ -123,21 +123,15 @@ function validateSignIn(){
         }
     }
     else if (invalidFields.length===0){
-        document.getElementsByClassName("submit").item(0).type="submit";
+        document.getElementsByClassName("submit").item(index).type="submit";
     }
 }
 
-function validateSignup(){
-    let signUpForm=document.getElementsByClassName("signup-form").item(0);
-    let invalidFields=signUpForm.getElementsByClassName("toolTipTextInvalid");
+validateEmail('text-input', 0)
+validatePassword('password-input', 0)
 
-    if (invalidFields.length!==0){
-        for (let i=0; i<invalidFields.length; i++){
-            invalidFields[i].style.visibility="visible";
-            invalidFields[i].style.opacity="1";
-        }
-    }
-    else if (invalidFields.length===0){
-        document.getElementsByClassName("submit").item(2).type="submit";
-    }
-}
+validateName('text-input', 1)
+validateName('text-input', 2)
+validateEmail('text-input', 3)
+validatePassword('password-input', 1)
+validatePassword('password-input', 2)

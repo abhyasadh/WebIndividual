@@ -102,6 +102,17 @@
     padding-bottom: 6px;
 }
 
+.head .profile .left-align-profile .drop-down-profile::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+}
+
 .head .profile .left-align-profile .drop-down-profile .dropdown-element {
     align-content: center;
     padding-top: 4px;
@@ -149,8 +160,9 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     color: white;
-    display: inline-block;
+    display: flex;
     text-decoration: none;
+    align-items: center;
 }
 
 .head .profile .profile-div .picture img{
@@ -165,6 +177,66 @@
 body{
     padding: 0;
     margin: 0;
+}
+
+.payment-popup{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    gap: 16px;
+    top:40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.30);
+    background-color: #ffffff;
+    border-radius: 16px;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 5;
+    transition: 0.5s;
+}
+
+.payment-popup.active{
+    top:50%;
+    visibility: visible;
+    opacity: 1;
+    z-index: 5;
+    transition: 0.5s;
+}
+
+.middle.active {
+    filter: blur(10px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.payment-popup .booking-period {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.payment-popup .popup-field-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.payment-popup .date-input {
+    width: calc(100% - 20px);
+    height: 37px;
+    border: none;
+    background-color: #EFEFEF;
+    font-size: 16px;
+    border-radius: 8px;
+    padding-left: 12px;
+    padding-right: 8px;
+    font-family: Blinker, sans-serif;
+    font-weight: 500;
 }
 
 .middle{
@@ -269,9 +341,9 @@ h3{
     margin-top: 4px;
 }
 
-.middle .display-items .items-container .items .item {
+.item {
     min-width: 242px;
-    height: 266px;
+    min-height: 266px;
     flex: 1;
     border-style: solid;
     background-color: #ddebf7;
@@ -285,7 +357,11 @@ h3{
     font-size: 18px;
 }
 
-.middle .display-items .items-container .items .item hr {
+.payment-popup .item {
+    margin: 0;
+}
+
+.item hr {
     border: 1px solid #a9cfee;
     border-radius: 50%;
     background-color: #a9cfee;
@@ -318,13 +394,13 @@ h3{
     padding-top: 0;
 }
 
-.middle .display-items .items-container .items .item .item-image{
+.item .item-image{
     height: 176px;
     border-radius: 9px;
     margin: 6px;
 }
 
-.middle .display-items .items-container .items .item .item-image img{
+.item .item-image img{
     position: absolute;
     width: 229px;
     height: 180px;
@@ -341,33 +417,45 @@ h3{
     color: white;
     text-align: center;
     padding-top: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.middle .display-items .items-container .items .item .item-image .image-details .image-prices{
-    width: 165px;
-    height: 33px;
-    margin: 4px;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: all 150ms ease-in;
-    border-style: none;
+.middle .display-items .items-container .items .item .item-image .image-details .field-container{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.middle .display-items .items-container .items .item .item-image .image-details .field-container .divider {
+    background-color: white;
+    width: 2px;
+    border-radius: 1px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.middle .display-items .items-container .items .item .item-image .image-details .field-container .headings, .middle .display-items .items-container .items .item .item-image .image-details .field-container .data{
+    display: flex;
+    align-items: center;
+    font-family: Blinker, serif;
+    font-weight: bold;
     font-size: 15px;
+    color: white;
+    min-width: 92px;
 }
 
-.middle .display-items .items-container .items .item .item-image .image-details .image-prices:hover{
-    scale: 1.05;
+.middle .display-items .items-container .items .item .item-image .image-details .field-container .headings{
+    min-width: 65px;
 }
 
-.middle .display-items .items-container .items .item .item-image .image-details .image-prices h2{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
-}
 
 .middle .display-items .items-container .items .item .item-image:hover .image-details{
     opacity: 0.8;
 }
 
-.middle .display-items .items-container .items .item .bike-name{
+.item .bike-name{
     width: 100%;
     text-align: center;
     font-family: Artifika, serif;
@@ -378,7 +466,7 @@ h3{
     cursor: pointer;
 }
 
-.middle .display-items .items-container .items .item .bike-brand{
+.item .bike-brand{
     width: 100%;
     text-align: center;
     font-family: Blinker, serif;
@@ -398,6 +486,12 @@ h3{
     background-color: #586ba4;
     display: flex;
     flex-direction: column;
+}
+
+.footer.active{
+    filter: blur(10px);
+    pointer-events: none;
+    user-select: none;
 }
 
 .footer .upper-part{

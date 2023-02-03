@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Blinker' rel='stylesheet'>
+
     <link th:href="@{~/css/application.css}" rel="stylesheet">
     <title th:text="${category.categoryName}+' || BikeSapati'"></title>
+
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{~/images/motorcycle-solid.svg}">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous">
+  </script>
+
 </head>
 <body>
 <header>
@@ -23,14 +33,36 @@
         <span th:text="${category.categoryDescription}" class="desc"></span>
         <div class="items">
           <div class="item" th:each="bike:${bikeList}">
-            <a th:href="@{~/bike/}+${rented.id}" style="text-decoration: none">
+            <a th:href="@{~/bike/}+${bike.id}" style="text-decoration: none">
             <div class="item-image">
-              <img th:src="${bike.bikeImage}">
+              <img th:src="'data:image/png;base64,'+${bike.bikeImageBase64}">
               <div class="image-details">
-                <h4 style="margin-bottom:4px; margin-top:0">Choose a Plan: </h4>
-                <button class="image-prices" th:text="'Rs. '+${bike.priceDay}+' / Day'"></button>
-                <button class="image-prices" th:text="'Rs. '+${bike.priceMonth}+' / Month'"></button>
-                <button class="image-prices" th:text="'Rs. '+${bike.priceYear}+' / Year'"></button>
+                <h4 style="margin-bottom:14px; margin-top:0">Bike Specifications:</h4>
+                <div class="field-container">
+                  <div th:if="${bike.category.id==6}" class="headings">Range</div>
+                  <div th:unless="${bike.category.id==6}" class="headings">Mileage</div>
+                  <div class="divider"></div>
+                  <div class="data"><u th:text="${bike.mileage}"></u></div>
+                </div>
+
+                <div class="field-container">
+                  <div class="headings">Top Speed</div>
+                  <div class="divider"></div>
+                  <div class="data"><u th:text="${bike.topSpeed}+' km/hr'"></u></div>
+                </div>
+
+                <div class="field-container">
+                  <div th:if="${bike.category.id==6}" class="headings">Motor</div>
+                  <div th:unless="${bike.category.id==6}" class="headings">Engine</div>
+                  <div class="divider"></div>
+                  <div class="data"><u th:text="${bike.power}"></u></div>
+                </div>
+
+                <div class="field-container">
+                  <div class="headings">Price</div>
+                  <div class="divider"></div>
+                  <div class="data"><u th:text="'Rs. '+${bike.priceDay}+' / Day'"></u></div>
+                </div>
               </div>
             </div>
             <hr style="width:90%">
@@ -47,5 +79,18 @@
 <footer>
     <div th:replace="~{fragments/footer.html :: footer}"></div>
 </footer>
+
+<script type="text/javascript">
+  let time = ['Day', 'Month', 'Year'];
+  let index = 0;
+  $('.image-prices').each(function() {
+    let monetary_value = $(this).text();
+    let i = new Intl.NumberFormat('en-IN').format(monetary_value);
+    $(this).text("Rs. "+i+" / "+time[index]);
+    index++;
+    if (index===3) index=0;
+  });
+</script>
+
 </body>
 </html>
