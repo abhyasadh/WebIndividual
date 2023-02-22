@@ -1,7 +1,6 @@
 package com.system.bike_rental_system.pojo;
 
 import com.system.bike_rental_system.entity.Bike;
-import com.system.bike_rental_system.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +24,9 @@ public class BikePojo {
     private Integer priceDay;
     private Integer availableNo;
     private MultipartFile bikeImage;
+    private String bikeImageBase64;
     private Integer rentedNumber;
-    private Category category;
+    private Integer category;
 
     public BikePojo(Bike bike) {
         this.id = bike.getId();
@@ -41,6 +41,6 @@ public class BikePojo {
         this.priceDay = bike.getPriceDay();
         this.availableNo = bike.getAvailableNo();
         this.rentedNumber = bike.getRentedNumber();
-        this.category = bike.getCategory();
+        this.category = bike.getCategory().getId();
     }
 }

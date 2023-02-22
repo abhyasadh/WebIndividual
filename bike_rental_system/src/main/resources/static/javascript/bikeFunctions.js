@@ -1,3 +1,22 @@
+$(function(){
+    let date = new Date();
+    date.setDate(date.getDate() + 1)
+
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let year = date.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    let minDate = year + '-' + month + '-' + day;
+    $('#bookingDate').attr('min', minDate);
+
+    year = date.getFullYear() + 2;
+    let maxDate = year + '-' + month + '-' + day;
+    $('.date-input').attr('max', maxDate);
+});
+
 function bookingForm(time){
     let blur = document.getElementsByClassName("middle").item(0);
     blur.classList.toggle('active');
@@ -29,8 +48,26 @@ function priceSetter(price){
 
     let date1 = new Date(datePicker[0].value);
     let date2 = new Date(datePicker[1].value);
+    let date3 = new Date(datePicker[0].value);
 
-    const diffTime = Math.abs(date2.getTime()-date1.getTime());
+    date1.setDate(date1.getDate() + 1)
+
+    let month = date1.getMonth() + 1;
+    let day = date1.getDate();
+    let year = date1.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    let minDate = year + '-' + month + '-' + day;
+    $('#releaseDate').attr('min', minDate);
+
+    if ((date2.getTime()-date3.getTime())<0) {
+        document.getElementById('releaseDate').valueAsDate = date1;
+        date2 = date1;
+    }
+
+    const diffTime = Math.abs(date2.getTime()-date3.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     document.getElementById("priceField").value=priceCalculator(diffDays, price);
@@ -49,9 +86,11 @@ function priceCalculator(days, price){
         calculatedPrice = (price + (0.8*price*6) + (0.6*price*(days-7)));
     } else if (days > 30 && days <= 122){
         calculatedPrice = (price + (0.8*price*6) + (0.6*price*23) + (0.5*price*(days-30)));
-    } else if (days > 122 && days <= 365){
-        calculatedPrice = (price + (0.8*price*6)) + (0.6*price*23) + (0.5*price*92) + (0.4*price*(days-122));
+    } else if (days > 122){
+        calculatedPrice = (price + (0.8*price*6) + (0.6*price*23) + (0.5*price*92) + (0.4*price*(days-122)));
     }
+
+    console.log(calculatedPrice);
 
     let i = new Intl.NumberFormat('en-IN').format(calculatedPrice);
     return "Rs. "+i+" / -";
@@ -59,13 +98,6 @@ function priceCalculator(days, price){
 
 let time = ['Day', 'Month', 'Year'];
 let index = 0;
-$('.image-prices').each(function() {
-    let monetary_value = $(this).text();
-    let i = new Intl.NumberFormat('en-IN').format(monetary_value);
-    $(this).text("Rs. "+i+" / "+time[index]);
-    index++;
-    if (index===3) index=0;
-});
 
 $('.price').each(function() {
     let monetary_value = $(this).text();

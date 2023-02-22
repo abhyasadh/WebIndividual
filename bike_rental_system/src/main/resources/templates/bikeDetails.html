@@ -30,6 +30,7 @@
 <header>
   <div th:replace="~{fragments/searchBar.html :: search-bar-normal}"></div>
 </header>
+<script th:src="@{~/javascript/message.js}"></script>
 
 <article>
   <div class="payment-popup">
@@ -43,17 +44,16 @@
     </div>
     <div class="booking-period">
       <h3 style="margin-top: 2px; margin-bottom: 20px; font-size: 30px">Confirm Booking</h3>
-      <form class="popup-field-container" th:method="post" th:action="@{/book}" th:object="${booking}">
+      <form class="popup-field-container" th:method="post" th:action="@{/book/}+${bike.id}" th:object="${booking}">
         <input hidden type="text" id="bike-id" name="bikeId" th:value="${bike.id}">
-        <input hidden type="text" id="user-id" name="userId" th:value="${loggedUser.id}">
         <div class="field-container" style="width: 100%">
           <div class="headings">From:</div>
-          <input type="date" class="date-input" th:attr="onclick=|priceSetter(${bike.priceDay})|" th:field="*{bookingDate}">
+          <input type="date" class="date-input" id="bookingDate" onkeydown="return false;" th:attr="onchange=|priceSetter(${bike.priceDay})|" th:field="*{bookingDate}">
         </div>
 
         <div class="field-container" style="width: 100%">
           <div class="headings">To:</div>
-          <input type="date" class="date-input" th:attr="onclick=|priceSetter(${bike.priceDay})|" th:field="*{releaseDate}">
+          <input type="date" class="date-input" id="releaseDate" onkeydown="return false;" th:attr="onchange=|priceSetter(${bike.priceDay})|" th:field="*{releaseDate}">
         </div>
 
         <div class="field-container" style="width: 100%">
@@ -129,12 +129,24 @@
 
             <div class="divider" style="margin-top: 24px; margin-bottom: 24px;"></div>
 
-            <div class="prices">
+            <div class="prices" th:if="${loggedUser.status=='Approved' && notBookedCurrently && bike.availableNo>0}">
               <p><u>Choose an option:</u></p>
               <input hidden class="priceInvisible" th:value="${bike.priceDay}">
               <button class="price" th:text="${bike.priceDay}" onclick="bookingForm(1)"></button>
               <button class="price" th:text="${bike.priceDay} + (0.8*${bike.priceDay}*6) + (0.6*${bike.priceDay}*23)" onclick="bookingForm(30)"></button>
               <button class="price" th:text="${bike.priceDay} + (0.8*${bike.priceDay}*6) + (0.6*${bike.priceDay}*23) + (0.5*${bike.priceDay}*92) + (0.4*${bike.priceDay}*243)" onclick="bookingForm(365)"></button>
+            </div>
+            <div class="prices" th:if="${loggedUser.status!='Approved'}">
+              <input hidden class="priceInvisible" th:value="${bike.priceDay}">
+              <span>Please, fill in the required details and submit your documents to rent your bike <a th:href="@{~/account}">here.</a></span>
+            </div>
+            <div class="prices" th:if="${!notBookedCurrently && loggedUser.status=='Approved'}">
+              <input hidden class="priceInvisible" th:value="${bike.priceDay}">
+              <span>A user is only permitted to have one booking at a time. If your booking date has not yet arrived, you can cancel your reservation <a th:href="@{~/my-bookings}">here</a>.</span>
+            </div>
+            <div class="prices" th:if="${bike.availableNo<1 && notBookedCurrently && loggedUser.status=='Approved'}">
+              <input hidden class="priceInvisible" th:value="${bike.priceDay}">
+              <span>This bike is not available at the moment. Please try again in a few days. Thank you for your understanding.</span>
             </div>
           </div>
         </div>

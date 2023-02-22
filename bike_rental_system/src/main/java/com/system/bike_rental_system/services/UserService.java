@@ -11,6 +11,7 @@ public interface UserService {
 
     //Create ------------------------------------------------------
     void saveUser(UserPojo userPojo);
+    void saveUser(User user);
 
 
     //Retrieve ----------------------------------------------------
@@ -26,7 +27,13 @@ public interface UserService {
 
 
     //Delete -------------------------------------------------------
-    void deleteAccount(Integer id);
+    void deleteAccount(PasswordChangePojo passwordChangePojo);
+
+    void sendEmail();
+
+    String updateResetPassword(String email);
+
+    void processPasswordResetRequest(String email);
 
 //    to send email
 //    void sendEmail();

@@ -16,6 +16,7 @@ public class BookingPojo {
     private Integer userId;
     private String bookingDate;
     private String releaseDate;
+    private String status;
 
     public BookingPojo(Booking booking) {
         this.id = booking.getId();
@@ -23,5 +24,6 @@ public class BookingPojo {
         this.userId = booking.getUserId().getId();
         this.bookingDate = String.valueOf(booking.getBookingDate());
         this.releaseDate = String.valueOf(booking.getReleaseDate());
+        this.status = booking.getStatus();
     }
 }

@@ -9,7 +9,7 @@
   <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
 
     <link th:href="@{~/css/application.css}" rel="stylesheet">
-    <title th:text="${category.categoryName}+' || BikeSapati'"></title>
+    <title>Search || BikeSapati</title>
 
   <link rel="shortcut icon" type="image/x-icon" th:href="@{~/images/motorcycle-solid.svg}">
 
@@ -25,16 +25,25 @@
 </header>
 
 <article>
-  <div class="middle">
+  <div class="middle" style="min-height: calc(100vh - 262px);">
     <!-- Body -->
-    <div class="display-items">
-      <div class="items-container" th:object="${category}">
+    <div class="display-items" style="width: 100%">
+      <div class="items-container">
         <div class="topic">
           <div class="see-more">
             <a th:href="@{/home}">⮜ <u>Back</u></a>
-          </div><h3 th:text="${category.categoryName}"></h3></div>
-        <span th:text="${category.categoryDescription}" class="desc"></span>
+          </div><h3 th:text="'Search Results For: '+${searchTerm}"> </h3>
+        </div>
+        <span class="desc"></span>
         <div class="items">
+          <div class="item" th:if="${bikeList.isEmpty()}">
+            <div class="item-image">
+              <img th:src="@{~/images/bikeSilhouette.png}">
+            </div>
+            <hr style="width:90%">
+            <div class="bike-name" style="margin-top: 20px">Not Found!</div>
+          </div>
+
           <div class="item" th:each="bike:${bikeList}">
             <a th:href="@{~/bike/}+${bike.id}" style="text-decoration: none">
             <div class="item-image">

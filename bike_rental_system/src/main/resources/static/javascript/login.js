@@ -1,4 +1,5 @@
 document.getElementsByClassName('signup-container').item(0).style.display="none";
+document.getElementsByClassName('login-container').item(1).style.display="none";
 
 document.getElementsByClassName("login").item(0).addEventListener("click", ()=>{displayLogin()})
 document.getElementsByClassName("signup").item(0).addEventListener("click", ()=>{displaySignup()})
@@ -7,6 +8,7 @@ let login = document.getElementsByClassName('login').item(0);
 let signup = document.getElementsByClassName('signup').item(0);
 function displayLogin(){
     document.getElementsByClassName('signup-container').item(0).style.display="none";
+    document.getElementsByClassName('login-container').item(1).style.display="none";
     document.getElementsByClassName('login-container').item(0).style.display="flex";
 
     signup.style.color="#f17300";
@@ -20,6 +22,7 @@ function displayLogin(){
 
 function displaySignup(){
     document.getElementsByClassName('login-container').item(0).style.display="none";
+    document.getElementsByClassName('login-container').item(1).style.display="none";
     document.getElementsByClassName('signup-container').item(0).style.display="flex";
 
     login.style.color="#f17300";
@@ -29,6 +32,20 @@ function displaySignup(){
     login.style.scale="0.8";
     signup.style.color="white";
     signup.style.background="#f17300"
+}
+
+function displayForgot(){
+    document.getElementsByClassName('login-container').item(0).style.display="none";
+    document.getElementsByClassName('login-container').item(1).style.display="flex";
+    document.getElementsByClassName('signup-container').item(0).style.display="none";
+
+    signup.style.scale="1";
+    signup.style.color="white";
+    signup.style.background="#f17300"
+
+    login.style.color="white";
+    login.style.background="#f17300";
+    login.style.scale="1";
 }
 
 function showPassword(n) {

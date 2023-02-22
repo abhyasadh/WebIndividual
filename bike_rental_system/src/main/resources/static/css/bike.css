@@ -69,6 +69,7 @@ h3{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .middle .display-items .items-container .bike-details-container .bike-data-container {
@@ -145,6 +146,17 @@ h2{
     margin-bottom: 14px;
 }
 
+.middle .display-items .items-container .bike-details-container .bike-data-container .prices span{
+    font-family: Blinker, serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333333;
+    min-width: 115px;
+    margin-bottom: 14px;
+    text-align: center;
+    width: 90%;
+}
+
 .middle .display-items .items-container .bike-details-container .bike-data-container .prices .price{
     width: 70%;
     height: 42px;
@@ -183,5 +195,16 @@ h2{
     .middle .display-items .items-container .bike-details-container .bike-data-container .specifications .data {
         min-width: 152px;
     }
+}
 
+@media (max-width: 610px) {
+    .bike-data-container{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 745px) {
+    .payment-popup{
+        flex-direction: column;
+    }
 }

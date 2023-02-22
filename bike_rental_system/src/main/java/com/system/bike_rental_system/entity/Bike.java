@@ -2,6 +2,8 @@ package com.system.bike_rental_system.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Data
 @Builder
@@ -10,6 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "bike")
 public class Bike {
     @Id
@@ -59,6 +63,6 @@ public class Bike {
     @Transient
     private String bikeImageBase64;
 
-    @Column
+    @Column(columnDefinition = "integer default 0")
     private Integer rentedNumber;
 }

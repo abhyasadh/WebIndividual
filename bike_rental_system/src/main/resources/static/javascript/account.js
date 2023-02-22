@@ -1,21 +1,3 @@
-document.getElementsByClassName("remove").item(0).addEventListener("click",
-    ()=>{
-    document.getElementsByClassName("no-image").item(0)
-        .innerHTML="<img src='../images/drop-down/user.png'>" +
-        "<span class='toolTipTextValid'>Accepted!</span>";
-        fetch("../images/drop-down/user.png")
-            .then(response => response.blob())
-            .then(blob => {
-                const file = new File([blob], 'user.png', { type: 'image/png' });
-
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
-                document.getElementById("profile-pic").files = dataTransfer.files;
-            });
-    document.getElementsByClassName("picture-uploader").item(0)
-        .style.border="2px solid #71cc35";
-})
-
 function validateName(index){
     let name = document.getElementsByClassName('text-input').item(index).value;
     if (name===""){
@@ -90,17 +72,12 @@ function documentsCheck(id, index){
     } else if (fileInput.files[0].size>5242880){
         document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>File too large! (Max size: 5MB)";
         document.getElementsByClassName("fa fa-address-card fa-xs").item(index).style.color="#e53e3e";
+        document.getElementsByClassName("document-image").item(index).src = URL.createObjectURL(event.target.files[0]);
     } else {
         document.getElementsByClassName("document-name").item(index).innerHTML="<i class='fa fa-address-card fa-xs'></i>Uploaded Successfully!";
         document.getElementsByClassName("fa fa-address-card fa-xs").item(index).style.color="#71cc35";
+        document.getElementsByClassName("document-image").item(index).src = URL.createObjectURL(event.target.files[0]);
     }
-}
-
-function changeStatus(){
-    document.getElementsByClassName("text-field-status").item(0)
-        .innerHTML="<h2>Status: Submitted</h2>"
-
-    statusUpdate();
 }
 
 function showPassword(n) {
@@ -143,7 +120,7 @@ function validatePassword(index){
         if (!password.match(passwordReg)) {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#e53e3e";
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML=
-                "<span class='toolTipTextInvalid' style='width: 260px; margin-left: -130px'>Password must be at least 8 characters long with<br>at least one uppercase character, one lowercase character, one number and one special character!</span>";
+                "<span class='toolTipTextInvalid' style='width: 216px; margin-left: -108px'>Password must be at least 8 characters long with at least one uppercase character, one lowercase character, one number and one special character!</span>";
         } else {
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).style.color = "#71cc35";
             document.getElementsByClassName("fas fa-lock fa-xs").item(index).innerHTML="<span class='toolTipTextValid'>Accepted!</span>";
@@ -260,6 +237,8 @@ validateAddress();
 validatePassword(0);
 validatePassword(1);
 validatePassword(2);
-validatePassword(3);
 
-statusUpdate();
+if (document.getElementsByClassName("password-input").length>3) {
+    validatePassword(3);
+    statusUpdate();
+}

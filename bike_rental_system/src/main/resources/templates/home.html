@@ -6,7 +6,6 @@
 
     <link th:href="@{~/css/application.css}" rel="stylesheet">
 
-    <script th:src="@{~/javascript/home.js}" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Suez+One' rel='stylesheet'>
@@ -16,6 +15,8 @@
     <link href='https://fonts.googleapis.com/css?family=Artifika' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
+    <script th:src="@{~/javascript/hideDivision.js}" defer></script>
+
     <link rel="shortcut icon" type="image/x-icon" th:href="@{~/images/motorcycle-solid.svg}">
 
     <title>Bikes || BikeSapati</title>
@@ -23,15 +24,18 @@
 <body>
     <header>
         <div th:replace="~{fragments/searchBar.html :: search-bar-normal}"></div>
+        <div th:if="${message}">
+            <div th:replace="~{fragments/message.html :: message-div}"></div>
+        </div>
+        <script th:src="@{~/javascript/message.js}"></script>
     </header>
-
     <article>
         <div class="middle">
             <!-- Body -->
             <div class="display-items">
                 <div class="items-container">
-                    <div class="topic"><h3>Most Rented</h3></div>
-                    <div class="items">
+                    <div class="topic"><button type="button" class="hideDivButton" id="Most Rented">Most Rented &#9652;</button></div>
+                    <div class="items" id="Most Rented Div">
                         <div class="position" th:each="rented:${mostRented}">
                             <span></span>
                             <div class="item">
@@ -77,15 +81,24 @@
                     <hr>
                 </div>
 
+                <script>
+                    spanNumber = document.getElementsByTagName("span");
+                    idNumber = document.getElementsByClassName("position");
+                    for (let i=1; i<5; i++){
+                        spanNumber[i].innerText="#"+i;
+                        idNumber[i-1].setAttribute("id","pos"+i);
+                    }
+                </script>
+
                 <div th:each="element : ${categoryBike}" class="items-container">
                     <div class="topic">
                         <div class="see-more">
                             <a th:href="@{~/category/}+${element.key.id}">
                                 <u>See All</u> ⮞</a>
                         </div>
-                        <h3 th:text="${element.key.categoryName}"></h3>
+                        <button type="button" class="hideDivButton" th:text="${element.key.categoryName}+' &#9652;'" th:id="${element.key.categoryName}"></button>
                     </div>
-                    <div class="items">
+                    <div class="items" th:id="${element.key.categoryName}+' Div'">
                         <div th:each="bike : ${element.value}" class="item">
                             <a th:href="@{~/bike/}+${bike.id}" style="text-decoration: none; color: white">
                             <div class="item-image" style="display: block">
@@ -138,9 +151,3 @@
     </footer>
 </body>
 </html>
-
-<!-- <576px
-576px - 768px
-768px - 992px
-992px - 1200px
->1200px -->

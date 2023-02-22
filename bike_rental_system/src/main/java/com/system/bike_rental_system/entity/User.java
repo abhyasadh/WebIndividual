@@ -5,9 +5,11 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -44,7 +46,7 @@ public class User implements UserDetails {
     @Column()
     private String address;
 
-    @Column(columnDefinition = "varchar(255) default '/user-documents/profile-picture/user.png'")
+    @Column(columnDefinition = "varchar(255) default 'profile-picture\\user.png'")
     private String image;
 
     @Transient
@@ -86,7 +88,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
     @Override

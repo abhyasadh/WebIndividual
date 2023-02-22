@@ -33,8 +33,8 @@ public class UserRepoTest {
     @Test
     @Order(2)
     public void getUserTest(){
-        User userCreated=userRepo.findById(1).get();
-        Assertions.assertThat(userCreated.getId()).isEqualTo(1);
+        User userCreated=userRepo.findById(80).get();
+        Assertions.assertThat(userCreated.getId()).isEqualTo(80);
     }
     @Test
     @Order(3)
@@ -46,7 +46,7 @@ public class UserRepoTest {
     @Order(4)
     @Rollback(value = false)
     public void updateUserTest(){
-        User user =userRepo.findById(1).get();
+        User user =userRepo.findById(80).get();
         user.setFName("Abhyas");
         User userUpdated = userRepo.save(user);
         Assertions.assertThat(userUpdated.getFName()).isEqualTo("Abhyas");
@@ -56,7 +56,7 @@ public class UserRepoTest {
     @Order(5)
     @Rollback(value = false)
     public void deleteUserTest(){
-        User user = userRepo.findById(1).get();
+        User user = userRepo.findById(80).get();
         userRepo.delete(user);
         
         User user1 = null;
@@ -66,4 +66,7 @@ public class UserRepoTest {
         }
         Assertions.assertThat(user1).isNull();
     }
+
+//    50,3,/Suzuki_Avenis 125.jpg,Avenis 125,Suzuki,"10 Nm @ 5,500 rpm",54 kmpl,124 cc,1000,0,5.2 Litres,90,Automatic,2
+
 }

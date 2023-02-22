@@ -17,6 +17,10 @@ body {
     z-index: 4;
 }
 
+.head-login .logo-div{
+    flex: 1;
+}
+
 .head-login .navbar {
     display: flex;
     flex: 0.7;
@@ -132,7 +136,7 @@ body {
     align-items: center;
 }
 
-i {
+.text-input-container i, .show-password-button i, .document-name i {
     margin-left: 10px;
     color: #9f9f9f;
     cursor: pointer;
@@ -251,7 +255,7 @@ input:focus ~ i {
     outline: none;
 }
 
-.form-container .form .password-input-container, .settings-container .security-container .password-input-container {
+.password-input-container {
     width: 100%;
     display: flex;
     border-radius: 8px;
@@ -261,7 +265,7 @@ input:focus ~ i {
     margin-top: 20px;
 }
 
-.form-container .form .password-input, .settings-container .security-container .password-input-container .password-input{
+.password-input {
     width: 100%;
     height: 38px;
     border-radius: 8px;
@@ -270,11 +274,11 @@ input:focus ~ i {
     padding-left: 30px;
 }
 
-.form-container .form .password-input:focus, .settings-container .security-container .password-input-container .password-input:focus{
+.password-input:focus {
     outline: none;
 }
 
-.form-container .form .show-password-button, .settings-container .security-container .password-input-container .show-password-button{
+.show-password-button{
     width: 28px;
     height: 28px;
     margin-right: 12px;
@@ -294,6 +298,7 @@ input:focus ~ i {
     margin-left: 118px;
     color: #586ba4;
     position: relative;
+    cursor: pointer;
 }
 
 .form-container .form .login-form .forgot a:after, .head-login .navbar a:after {
@@ -461,6 +466,18 @@ input:focus ~ i {
 .reviews .review-container .box p{
     color: #5f5f5f;
     font-style: italic;
+}
+
+@media (max-width: 690px) {
+    .head-login .logo-div .logo {
+        width: 84px;
+        object-fit: cover;
+        object-position: 0;
+    }
+
+    .head-login .logo-div {
+        flex: 0.3;
+    }
 }
 
 @media (max-width: 780px) {

@@ -39,4 +39,8 @@ public class Booking {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column
     private Date releaseDate;
+
+    @Column(columnDefinition = "varchar(255) default 'Booked'")
+    private String status;
+
 }

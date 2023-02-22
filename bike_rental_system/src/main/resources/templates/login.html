@@ -24,7 +24,7 @@
     <div class="head-login">
 
         <!-- Logo Division -->
-        <div class="logo-div" style="flex: 1">
+        <div class="logo-div">
             <img th:src="@{~/images/logos/logopng.png}" alt="Logo" class="logo">
         </div>
 
@@ -34,8 +34,14 @@
             <li><a href="#about">About</a></li>
             <li><a href="#reviews">Reviews</a></li>
         </ul>
-
     </div>
+    <div th:if="${message}">
+        <div th:replace="~{fragments/message.html :: message-div}"></div>
+    </div>
+    <div th:if="${errorMessage}">
+        <div th:replace="~{fragments/message.html :: errorMessage-div}"></div>
+    </div>
+    <script th:src="@{~/javascript/message.js}"></script>
 </header>
 
     <div class="form-container" id="home">
@@ -66,7 +72,7 @@
                     </div>
 
                     <div class="forgot">
-                        <a href="#" class="forgot">Recover Password</a>
+                        <a class="forgot" onclick="displayForgot()">Recover Password</a>
                     </div>
 
                     <button type="button" class="submit" style="margin-top: 29px" onclick="validateSubmitButton('login-form', 0)">SIGN IN</button>
@@ -113,6 +119,18 @@
 
                     <button type="button" onclick="validateSubmitButton('signup-form', 2)" class="submit">REGISTER</button>
                 </form>
+            </div>
+
+            <div class="login-container">
+                <form class="login-form" th:method="post" th:action="@{/change-password}" th:object="${user}">
+                    <div class="text-input-container">
+                        <input type="email" placeholder="Enter your email..." name="email" class="text-input" onkeyup="validateEmail('text-input', 4)">
+                        <i class="fas fa-envelope fa-xs"><span class='toolTipTextInvalid'>Email can't be empty!</span></i>
+                    </div>
+
+                    <button type="submit" class="submit" style="margin-top: 29px" onclick="validateSubmitButton('login-form', 2)">RECOVER</button>
+                </form>
+
             </div>
 
         </div>

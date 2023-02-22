@@ -1,7 +1,9 @@
 package com.system.bike_rental_system.services.impl;
 
 import com.system.bike_rental_system.entity.Bike;
+import com.system.bike_rental_system.pojo.BikePojo;
 import com.system.bike_rental_system.repo.BikeRepo;
+import com.system.bike_rental_system.repo.CategoryRepo;
 import com.system.bike_rental_system.services.BikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -16,6 +20,48 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class BikeServiceImpl implements BikeService {
     private final BikeRepo bikeRepo;
+
+    private final CategoryRepo categoryRepo;
+
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "\\images\\bikes\\";
+
+    @Override
+    public String saveBike(BikePojo bikePojo) throws IOException {
+        Bike bike;
+        try {
+            bike = bikeRepo.findById(bikePojo.getId()).orElseThrow();
+        } catch (Exception e){
+            bike = new Bike();
+        }
+        bike.setBikeName(bikePojo.getBikeName());
+        bike.setBrandName(bikePojo.getBrandName());
+        bike.setAvailableNo(bikePojo.getAvailableNo());
+
+        if(!Objects.equals(bikePojo.getBikeImage().getOriginalFilename(), "")){
+            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, bikePojo.getBikeImage().getOriginalFilename());
+            Files.write(fileNameAndPath, bikePojo.getBikeImage().getBytes());
+
+            bike.setBikeImage(bikePojo.getBikeImage().getOriginalFilename());
+        }
+
+        bike.setPriceDay(bikePojo.getPriceDay());
+        bike.setMileage(bikePojo.getMileage());
+        bike.setMaxTorque(bikePojo.getMaxTorque());
+        bike.setPower(bikePojo.getPower());
+        bike.setTankCapacity(bikePojo.getTankCapacity());
+        bike.setTopSpeed(bikePojo.getTopSpeed());
+        bike.setTransmission(bikePojo.getTransmission());
+        bike.setCategory(categoryRepo.findById(bikePojo.getCategory()).orElseThrow());
+        bikeRepo.save(bike);
+        return "Bike Saved";
+    }
+
+    @Override
+    public String saveBikeByEntity(Bike bike){
+        bikeRepo.save(bike);
+        return "Updated";
+    }
+
     @Override
     public Bike fetchById(Integer id) {
         Bike bike = bikeRepo.findById(id).orElseThrow(()->new RuntimeException("Not Found"));
@@ -26,6 +72,7 @@ public class BikeServiceImpl implements BikeService {
                 .brandName(bike.getBrandName())
                 .availableNo(bike.getAvailableNo())
                 .rentedNumber(bike.getRentedNumber())
+                .bikeImage(bike.getBikeImage())
                 .bikeImageBase64(getImageBase64(bike.getBikeImage()))
                 .priceDay(bike.getPriceDay())
                 .mileage(bike.getMileage())
@@ -104,7 +151,6 @@ public class BikeServiceImpl implements BikeService {
                         .category(bike.getCategory())
                         .build()
         );
-
         list = allBikesWithImage.toList();
         return list;
     }
